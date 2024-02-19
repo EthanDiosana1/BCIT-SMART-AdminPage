@@ -1,0 +1,19 @@
+.editable-user-table {
+    text-align: left;
+    width: 100%;
+    border-radius: 2em;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.editable-user-table tr {
+    padding: 2em;
+    width: auto;
+    box-shadow: 2px 2px 7px black;
+}
+
+.editable-user-table thead {
+    background-color: rgb(64, 134, 255);
+    color: white;
+    height: 2em;
+}

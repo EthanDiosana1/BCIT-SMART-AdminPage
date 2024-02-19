@@ -1,0 +1,12 @@
+.editable-user-field-row button {
+    background-color: rgb(64, 134, 255);
+    color: white;
+    height: 2em;
+    width: 2em;
+    padding: 1.2em; 
+    margin: 1em auto 1em auto;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,22 @@
+.user-list {
+  background-color: grey;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.user-list > thead {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.user-list > tbody > :nth-child(2n) {
+  background-color: aliceblue;
+}
+
+.user-list > tbody > * {
+  border: none;
+}
+
+.user-list td:hover {
+  filter: brightness(200%);
+}
