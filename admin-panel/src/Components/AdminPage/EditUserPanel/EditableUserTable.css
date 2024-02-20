@@ -4,16 +4,17 @@
     border-radius: 2em;
     vertical-align: middle;
     text-align: center;
+    border-collapse: collapse;
 }
 
-.editable-user-table tr {
-    padding: 2em;
-    width: auto;
-    box-shadow: 2px 2px 7px black;
+.editable-user-table th,
+.editable-user-table td {
+  border: 1px solid black;
+  box-sizing: border-box; 
 }
 
 .editable-user-table thead {
-    background-color: rgb(64, 134, 255);
+    background-color: #013a94;
     color: white;
     height: 2em;
 }

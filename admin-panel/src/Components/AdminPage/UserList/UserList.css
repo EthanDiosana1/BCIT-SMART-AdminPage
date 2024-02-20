@@ -1,22 +1,43 @@
+
 .user-list {
-  background-color: grey;
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse; 
 }
 
-.user-list > thead {
-  background-color: white;
+.user-list thead {
+  display: table; 
+  width: calc(100% - 17px); 
+  background-color: #013a94;
+  color: white;
+  box-shadow: 0px 1px 3px black;
+}
+
+.user-list tbody {
+  display: block; 
+  max-height: 400px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
+
+.user-list th,
+.user-list td {
   border: 1px solid black;
+  box-sizing: border-box; 
 }
 
-.user-list > tbody > :nth-child(2n) {
+.user-list tr {
+  display: table; 
+  width: 100%; 
+  table-layout: fixed; 
+}
+
+.user-list tbody tr:nth-child(2n) {
   background-color: aliceblue;
 }
 
-.user-list > tbody > * {
-  border: none;
-}
 
-.user-list td:hover {
-  filter: brightness(200%);
+@media screen and (max-width: 767px) {
+  .user-list thead {
+    width: 100%; 
+  }
 }

@@ -1,3 +1,21 @@
 .user-list-item {
-    border: 1px solid black;
+    height: 2em !important;
 }
+
+.user-list-item button {
+    background-color: #fdf551;
+    outline: none;
+    border: none;
+    height: 2em;
+    width: 2em;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px black;
+}
+
+.user-list-item button:hover {
+   background-color: #bfb93e;
+}
+
+.user-list-item button:active {
+    size: 90%;
+ }

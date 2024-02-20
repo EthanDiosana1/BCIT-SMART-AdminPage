@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 export function UserListSearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [usersPerPage, setUsersPerPage] = useState(20)
+  const [usersPerPage, setUsersPerPage] = useState(20);
+  const [fieldToSearch, setFieldToSearch] = useState('displayname');
 
   /** Handles the search form submission.
    * 
@@ -38,6 +39,17 @@ export function UserListSearchBar({ onSearch }) {
           onChange={(event) => handleChange(event, setSearchTerm)}
           placeholder='Search users...'
         />
+      </div>
+      <div>
+        <label htmlFor='fieldSelect'>Field to search:</label>
+        <select
+          id='fieldSelect'
+          value={fieldToSearch}
+          onChange={(event) => handleChange(event, setFieldToSearch)}>
+          <option value='id'>id</option>
+          <option value='displayname'>displayname</option>
+          <option value='email'>email</option>
+        </select>
       </div>
       <div>
         <label htmlFor='numUsersPerPageInput'>Users per page:</label>

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { UserInfoContainer } from './UserList/UserInfoContainer'
 import { UserList } from './UserList/UserList'
 import { EditUserPanel } from './EditUserPanel/EditUserPanel'
-import { AdminPageNavbar } from '../AdminPageNavbar/AdminPageNavbar'
+import { AdminPageNavbar } from './AdminPageNavbar/AdminPageNavbar'
 
 export function AdminPage(props) {
   /** Contains the users list. */

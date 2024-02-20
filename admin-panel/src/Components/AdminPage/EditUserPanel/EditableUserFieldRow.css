@@ -1,6 +1,11 @@
 .editable-user-field-row button {
-    background-color: rgb(64, 134, 255);
-    color: white;
+    background-color: #fdf551;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px black;
+
     height: 2em;
     width: 2em;
     padding: 1.2em; 
@@ -9,4 +14,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.editable-user-field-row button:hover {
+    background-color: #bfb93e;
 }

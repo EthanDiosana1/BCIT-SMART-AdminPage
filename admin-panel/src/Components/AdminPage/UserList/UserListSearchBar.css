@@ -1,63 +1,92 @@
 .user-list-search-bar {
-    /* Aligns items horizontally */
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding: 20px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin-bottom: 20px; /* Space below the search bar */
-  }
   
-  .user-list-search-bar > div {
-    margin-right: 15px; /* Space between each section */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-radius: 8px;
   
-  .user-list-search-bar label {
-    display: block; /* Ensures the label takes up its own line */
-    margin-bottom: 5px; /* Space between the label and the input */
-    color: #333; /* Dark grey color for text */
-    font-size: 14px; /* Font size for the label */
-  }
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
+  margin-bottom: 20px;
+  
+}
+
+.user-list-search-bar>div {
+  margin-right: 15px;
+  width: fit-content;
+}
+
+.user-list-search-bar label {
+  display: block;
+  
+  margin-bottom: 5px;
+  
+  color: #333;
+  
+  font-size: 14px;
+  
+}
+
+.user-list-search-bar input[type='text'],
+.user-list-search-bar input[type='number'],
+.user-list-search-bar select {
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+  padding: 10px;
+
+  font-size: 16px;
+
+  min-width: 100px;
+
+  background-color: transparent;
+}
+
+.user-list-search-bar input[type='number'] {
+  width: 30px;
+}
+
+.user-list-search-bar button {
+  background-color: #013a94;
+  
+  color: white;
+  
+  padding: 10px 15px;
+  
+  border: none;
+  
+  border-radius: 4px;
+  
+  cursor: pointer;
+  
+  font-size: 16px;
+  
+  transition: background-color 0.3s ease;
+  
+}
+
+.user-list-search-bar button:hover {
+  background-color: #00336d;
+  
+}
+
+
+@media (max-width: 600px) {
+  .user-list-search-bar {
+    flex-direction: column;
+  }
+
+  .user-list-search-bar>div {
+    margin-right: 0;
+    margin-bottom: 15px;
+    
+  }
+
   .user-list-search-bar input[type='text'],
   .user-list-search-bar input[type='number'] {
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 4px; /* Rounded corners for the inputs */
-    padding: 10px; /* Padding inside the inputs */
-    font-size: 16px; /* Larger font size for easy reading */
-    width: 200px; /* Specific width for the inputs */
+    width: auto;
+    
   }
-  
-  .user-list-search-bar button {
-    background-color: #0056b3; /* A nice blue background color for the button */
-    color: white; /* White text for contrast */
-    padding: 10px 15px; /* Padding inside the button */
-    border: none; /* No border for a flat design */
-    border-radius: 4px; /* Rounded corners for the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size to match the inputs */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  }
-  
-  .user-list-search-bar button:hover {
-    background-color: #003d82; /* Darker blue on hover for a nice effect */
-  }
-  
-  /* Responsive design: stack elements on small screens */
-  @media (max-width: 600px) {
-    .user-list-search-bar {
-      flex-direction: column;
-    }
-  
-    .user-list-search-bar > div {
-      margin-right: 0;
-      margin-bottom: 15px; /* Space between sections when stacked */
-    }
-  
-    .user-list-search-bar input[type='text'],
-    .user-list-search-bar input[type='number'] {
-      width: auto; /* Inputs take the full width on small screens */
-    }
-  }
-  
+}
