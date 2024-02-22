@@ -1,0 +1,49 @@
+.modal-overlay {
+    /* position */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    /* flex options */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* size */
+    height: 100%;
+    width: 100%;
+
+    /* color */
+    background-color: rgba(0, 0, 0, 0.671);
+
+    /* other */
+    user-select: none;
+}
+
+.modal-content {
+    z-index: 1001;
+
+    /* flex options */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* size */
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+
+    /* border */
+    border: 1px solid white;
+    border-radius: 5px;
+
+    /* color */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.697);
+
+    /* Ensure that pointer events are enabled for the modal content */
+    pointer-events: all;
+}

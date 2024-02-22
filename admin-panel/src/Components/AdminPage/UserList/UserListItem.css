@@ -10,6 +10,7 @@
     width: 2em;
     border-radius: 3px;
     box-shadow: 1px 1px 2px black;
+    margin: 0px 10px 0px 10px;
 }
 
 .user-list-item button:hover {

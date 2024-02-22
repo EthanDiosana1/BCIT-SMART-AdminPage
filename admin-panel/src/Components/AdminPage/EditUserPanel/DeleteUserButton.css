@@ -1,0 +1,9 @@
+.delete-user-button {
+    color: white;
+    background-color: rgb(255, 0, 0) !important;
+    align-self: flex-end;
+}
+
+.delete-user-button:hover {
+    background-color: rgb(150, 0, 0) !important;
+}

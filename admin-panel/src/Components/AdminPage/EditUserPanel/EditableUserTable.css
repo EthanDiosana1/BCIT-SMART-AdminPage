@@ -13,6 +13,17 @@
   box-sizing: border-box; 
 }
 
+.editable-user-table tbody tr:last-child td {
+  border: none;
+  outline: none;
+}
+
+.editable-user-table tbody tr:last-child td:last-child {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
 .editable-user-table thead {
     background-color: #013a94;
     color: white;

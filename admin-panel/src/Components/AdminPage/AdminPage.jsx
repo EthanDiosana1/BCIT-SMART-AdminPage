@@ -1,26 +1,15 @@
 import './AdminPage.css'
-import testUsers from '../../data/testUsers.json' // Adjusted import path
+import testUsers from '../../data/testUsers.json';
 import React, { useState } from 'react'
 import { UserInfoContainer } from './UserList/UserInfoContainer'
-import { UserList } from './UserList/UserList'
 import { EditUserPanel } from './EditUserPanel/EditUserPanel'
 import { AdminPageNavbar } from './AdminPageNavbar/AdminPageNavbar'
+import { UserList } from './UserList/UserList'
 
 export function AdminPage(props) {
-  /** Contains the users list. */
-  const [usersList, setUsersList] = useState([])
 
   /** Contains the selected user. */
   const [selectedUserId, setSelectedUserId] = useState(null)
-
-  /** Retrieves all users from the db. */
-  function getAllUsers() {
-    try {
-    } catch (error) {
-      console.log(error)
-    }
-    return testUsers.testUsers
-  }
 
   /** Retrieves the selected user by id from the db. */
   function getSelectedUser(id) {
@@ -29,6 +18,29 @@ export function AdminPage(props) {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  /** Sends an API request to delete the selected user.
+   * 
+   * @param {string} userId The id of the user to delete.
+   * @returns 
+   */
+  function deleteUserButtonHandler(userId) {
+    // If the selected user id is null, exit.
+    if (!userId) {
+      return;
+    }
+
+    const parsed = parseInt(userId);
+    
+    // If the selected user id is not an int, throw an error.
+    if (!parsed || isNaN(parsed)) {
+      throw new Error(`userId is not a number: ${parsed}\n`);
+    }
+
+    // Send a request to delete the user.
+
+    // Display a modal saying the user has been deleted.
   }
 
   return (
@@ -40,12 +52,12 @@ export function AdminPage(props) {
           <EditUserPanel
             user={getSelectedUser(selectedUserId)}
             backButtonHandler={setSelectedUserId}
+            deleteUserButtonHandler={deleteUserButtonHandler(selectedUserId)}
           />)
           :
           (
             // If no user selected, display user list.
             <UserList
-              users={getAllUsers()}
               editUserButtonHandler={setSelectedUserId}
             />
           )}

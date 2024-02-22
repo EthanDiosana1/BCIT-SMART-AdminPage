@@ -7,6 +7,7 @@ import { EditUserButton } from './EditUserButton'
  * @returns
  */
 export function UserListItem({ user, editUserButtonHandler }) {
+
   return (
     <tr className='user-list-item'>
       <td>{user.id}</td>
@@ -15,7 +16,6 @@ export function UserListItem({ user, editUserButtonHandler }) {
       <td>
         <EditUserButton
           handleClick={() => {
-            console.log(user.id);
             editUserButtonHandler(user.id)
           }}
         />

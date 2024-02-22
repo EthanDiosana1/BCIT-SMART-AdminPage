@@ -1,15 +1,15 @@
-.edit-user-panel>button {
+.edit-user-panel button {
     background-color: #013a94;
     color: white;
     outline: none;
     border: none;
     border-radius: 2px;
     box-shadow: 1px 1px 2px black;
-    
+
     height: 2em;
     width: 2em;
     padding: 1.2em;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,4 +18,9 @@
 
 .edit-user-panel>button:hover {
     background-color: #002b70;
+}
+
+.edit-user-panel>div {
+    display: flex;
+    justify-content: space-between;
 }
