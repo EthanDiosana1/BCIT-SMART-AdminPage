@@ -10,7 +10,7 @@ import { useState } from 'react'
  * @param {{}} props
  * @returns
  */
-export function UserList({ editUserButtonHandler, setUserList }) {
+export function UserList({ editUserButtonHandler}) {
   /** Contains the users list. */
   const [users, setUsers] = useState(null);
 
@@ -94,7 +94,7 @@ export function UserList({ editUserButtonHandler, setUserList }) {
       console.trace(result);
 
       // Set the current user list.
-      setUserList(response);
+      setUsers(response);
 
     } catch (error) {
       console.log(error);
