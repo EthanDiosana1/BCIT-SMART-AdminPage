@@ -1,33 +1,42 @@
-import testUsers from '../../../data/testUsers.json' 
+import testUsers from '../../../data/testUsers.json'
 import { UserListItem } from './UserListItem'
 import './UserList.css'
 import { UserListSearchBar } from './UserListSearchBar'
 import { useState } from 'react'
 
 /** Displays a list of users.
+ * Includes a search bar.
  *
  * @param {{}} props
  * @returns
  */
 export function UserList({ editUserButtonHandler }) {
   /** Contains the users list. */
-  const [usersList, setUsersList] = useState(null);
+  const [users, setUsers] = useState(null);
 
-  /** The number of users per page. */
+  // Search bar params.
+  const [searchTerm, setSearchTerm] = useState('');
+  const [fieldToSearch, setFieldToSearch] = useState('');
   const [usersPerPage, setUsersPerPage] = useState(20);
 
   /** Retrieves all users from the db. */
   function getAllUsers(usersPerPage) {
     try {
-      if (!usersList) {
-        setUsersList(testUsers.testUsers);
-        return usersList;
+      if (!users) {
+        
+        const dbResponse = testUsers.testUsers;
+
+        setUsers(dbResponse);
+        return users;
       }
     } catch (error) {
       console.log(error)
     }
   }
-  
+
+  /** Get all of the users. */
+  getAllUsers(usersPerPage);
+
   /** Handles the search bar being clicked.
    * 
    * @param {string} fieldName The name of the field to search. 
@@ -35,27 +44,22 @@ export function UserList({ editUserButtonHandler }) {
    * @param {number} usersPerPage The number of users per page.
    */
   function searchButtonHandler(fieldName, fieldValue, usersPerPage) {
-    if(!fieldName) {
+    if (!fieldName) {
       throw new Error(`!fieldName`);
     }
-    if(!fieldValue) {
+    if (!fieldValue) {
       throw new Error(`!fieldValue`);
     }
-    if(!usersPerPage) {
+    if (!usersPerPage) {
       throw new Error(`!usersPerPage`);
     }
 
-    // TODO: Ensure that all of these html fields are required.
-
-    // TODO: Add search bar handling to the Trello.
-
-    // TODO: Download TODO highlight
   }
 
   return (
     <>
       <UserListSearchBar
-      searchButtonHandler={searchButtonHandler} />
+        searchButtonHandler={searchButtonHandler} />
       <table className='user-list'>
         <thead>
           <tr>
@@ -66,16 +70,16 @@ export function UserList({ editUserButtonHandler }) {
           </tr>
         </thead>
         <tbody>
-          { usersList ? 
-            
-            usersList.map((user, index) => {
+          {users ?
 
-            return <UserListItem
-              key={index}
-              user={user}
-              editUserButtonHandler={editUserButtonHandler}
-            />
-          }) : <tr>No users to display.</tr>}
+            users.map((user, index) => {
+
+              return <UserListItem
+                key={index}
+                user={user}
+                editUserButtonHandler={editUserButtonHandler}
+              />
+            }) : <tr>No users to display.</tr>}
         </tbody>
       </table>
     </>
