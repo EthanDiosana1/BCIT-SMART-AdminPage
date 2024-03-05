@@ -10,13 +10,13 @@ import { useState } from 'react'
  * @param {{}} props
  * @returns
  */
-export function UserList({ editUserButtonHandler}) {
+export function UserList({ editUserButtonHandler }) {
   /** Contains the users list. */
   const [users, setUsers] = useState(null);
 
   // Search bar params.
   const [searchTerm, setSearchTerm] = useState('');
-  const [fieldToSearch, setFieldToSearch] = useState('');
+  const [fieldToSearch, setFieldToSearch] = useState('displayname');
   const [usersPerPage, setUsersPerPage] = useState(20);
 
   /** Retrieves all users from the db. */
@@ -42,7 +42,8 @@ export function UserList({ editUserButtonHandler}) {
    * @param {string} fieldValue The value of the field to search.
    * @param {number} usersPerPage The number of users per page.
    */
-  async function searchButtonHandler(fieldName, fieldValue, usersPerPage, setUserList) {
+  async function searchButtonHandler(event, fieldName, fieldValue, usersPerPage) {
+    event.preventDefault();
     try {
       let endpoint; // The API endpoint to call.
       let response; // The response from the server.
@@ -79,7 +80,7 @@ export function UserList({ editUserButtonHandler}) {
       });
 
       if (!response.ok) {
-        throw new Error(`Error!`)
+        throw new Error(`Error! Response status: ${response.status}`);
       }
 
       // Convert to json.
@@ -103,7 +104,21 @@ export function UserList({ editUserButtonHandler}) {
   return (
     <>
       <UserListSearchBar
-        searchButtonHandler={searchButtonHandler} />
+        onSearch={(event) => {
+          searchButtonHandler(event, fieldToSearch, searchTerm, usersPerPage)
+        }}
+
+        fieldName={fieldToSearch}
+        setFieldName={setFieldToSearch}
+
+        fieldValue={searchTerm}
+        setFieldValue={setSearchTerm}
+
+        usersPerPage={usersPerPage}
+        setUsersPerPage={setUsersPerPage}
+      />
+
+
       <table className='user-list'>
         <thead>
           <tr>

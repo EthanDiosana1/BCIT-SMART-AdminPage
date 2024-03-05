@@ -1,42 +1,32 @@
 import './UserListSearchBar.css'
-import { useState } from 'react'
 
-export function UserListSearchBar({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [usersPerPage, setUsersPerPage] = useState(20);
-  const [fieldToSearch, setFieldToSearch] = useState('displayname');
-
-  /** Handles the search form submission.
-   * 
-   * @param {*} event 
-   */
-  async function handleSearch(event) {
-    event.preventDefault()
-
-    // Start search.
-    if (onSearch) {
-      onSearch(fieldToSearch, searchTerm, usersPerPage)
-    }
-  }
-
+export function UserListSearchBar({
+  fieldName, setFieldName,
+  fieldValue, setFieldValue,
+  usersPerPage, setUsersPerPage,
+  onSearch }) {
   /**
    * 
    * @param {*} event 
    * @param {*} state 
    */
   async function handleChange(event, state) {
-    state(event.target.value);
+    try {
+      state(event.target.value);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
-    <form className='user-list-search-bar' onSubmit={handleSearch}>
+    <form className='user-list-search-bar' onSubmit={onSearch}>
       <div>
         <label htmlFor='searchUser'>Search users:</label>
         <input
           id='searchUser'
           type='text'
-          value={searchTerm}
-          onChange={(event) => handleChange(event, setSearchTerm)}
+          value={fieldValue}
+          onChange={(event) => handleChange(event, setFieldValue)}
           placeholder='Search users...'
           required
           autoComplete='off'
@@ -46,8 +36,8 @@ export function UserListSearchBar({ onSearch }) {
         <label htmlFor='fieldSelect'>Field to search:</label>
         <select
           id='fieldSelect'
-          value={fieldToSearch}
-          onChange={(event) => handleChange(event, setFieldToSearch)}
+          value={fieldName}
+          onChange={(event) => handleChange(event, setFieldName)}
           required>
           <option value='id'>id</option>
           <option value='displayname'>displayname</option>
