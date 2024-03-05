@@ -23,7 +23,6 @@ export function UserList({ editUserButtonHandler}) {
   function getAllUsers(usersPerPage) {
     try {
       if (!users) {
-
         const dbResponse = testUsers.testUsers;
 
         setUsers(dbResponse);
@@ -99,7 +98,6 @@ export function UserList({ editUserButtonHandler}) {
     } catch (error) {
       console.log(error);
     }
-
   }
 
   return (

@@ -15,7 +15,7 @@ export function UserListSearchBar({ onSearch }) {
 
     // Start search.
     if (onSearch) {
-      onSearch(searchTerm, usersPerPage)
+      onSearch(fieldToSearch, searchTerm, usersPerPage)
     }
   }
 
@@ -39,6 +39,7 @@ export function UserListSearchBar({ onSearch }) {
           onChange={(event) => handleChange(event, setSearchTerm)}
           placeholder='Search users...'
           required
+          autoComplete='off'
         />
       </div>
       <div>
@@ -48,7 +49,7 @@ export function UserListSearchBar({ onSearch }) {
           value={fieldToSearch}
           onChange={(event) => handleChange(event, setFieldToSearch)}
           required>
-          <option value='id' required>id</option>
+          <option value='id'>id</option>
           <option value='displayname'>displayname</option>
           <option value='email'>email</option>
         </select>

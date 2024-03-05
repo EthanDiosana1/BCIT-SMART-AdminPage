@@ -1,7 +1,7 @@
 import './AdminPage.css'
 import testUsers from '../../data/testUsers.json';
 import React, { useState } from 'react'
-import { UserInfoContainer } from './UserList/UserInfoContainer'
+import { UserInfoContainer } from './UserInfoContainer'
 import { EditUserPanel } from './EditUserPanel/EditUserPanel'
 import { AdminPageNavbar } from './AdminPageNavbar/AdminPageNavbar'
 import { UserList } from './UserList/UserList'
