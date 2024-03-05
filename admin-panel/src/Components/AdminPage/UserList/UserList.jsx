@@ -10,7 +10,7 @@ import { useState } from 'react'
  * @param {{}} props
  * @returns
  */
-export function UserList({ editUserButtonHandler }) {
+export function UserList({ editUserButtonHandler}) {
   /** Contains the users list. */
   const [users, setUsers] = useState(null);
 
@@ -23,7 +23,6 @@ export function UserList({ editUserButtonHandler }) {
   function getAllUsers(usersPerPage) {
     try {
       if (!users) {
-        
         const dbResponse = testUsers.testUsers;
 
         setUsers(dbResponse);
@@ -43,17 +42,62 @@ export function UserList({ editUserButtonHandler }) {
    * @param {string} fieldValue The value of the field to search.
    * @param {number} usersPerPage The number of users per page.
    */
-  function searchButtonHandler(fieldName, fieldValue, usersPerPage) {
-    if (!fieldName) {
-      throw new Error(`!fieldName`);
-    }
-    if (!fieldValue) {
-      throw new Error(`!fieldValue`);
-    }
-    if (!usersPerPage) {
-      throw new Error(`!usersPerPage`);
-    }
+  async function searchButtonHandler(fieldName, fieldValue, usersPerPage, setUserList) {
+    try {
+      let endpoint; // The API endpoint to call.
+      let response; // The response from the server.
+      let result; // The json result from the server.
+      let params; // The params for the search.
 
+      if (!fieldName) {
+        throw new Error(`!fieldName`);
+      }
+      if (!fieldValue) {
+        throw new Error(`!fieldValue`);
+      }
+      if (!usersPerPage) {
+        throw new Error(`!usersPerPage`);
+      }
+
+      // TODO: replace this with the real endpoint.
+      endpoint = 'endpoint';
+
+      // Set the params
+      params = {
+        'fieldName': fieldName,
+        'fieldValue': fieldValue,
+        'usersPerPage': usersPerPage
+      }
+
+      // Get the response from the server.
+      response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error!`)
+      }
+
+      // Convert to json.
+      result = await response.json();
+
+      // Throw error if response is not array.
+      if (!result) {
+        throw new Error(`result is ${result}`);
+      }
+
+      console.trace(result);
+
+      // Set the current user list.
+      setUsers(response);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
