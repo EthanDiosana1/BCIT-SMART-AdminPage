@@ -20,7 +20,7 @@ export function UserList({ editUserButtonHandler }) {
   const [usersPerPage, setUsersPerPage] = useState(20);
 
   /** Retrieves all users from the db. */
-  function getAllUsers(usersPerPage) {
+  function getAllUsers() {
     try {
       if (!users) {
         const dbResponse = testUsers.testUsers;
