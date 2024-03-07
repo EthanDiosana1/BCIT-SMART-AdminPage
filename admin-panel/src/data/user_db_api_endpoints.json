@@ -1,0 +1,7 @@
+{
+    "getAllUsers": "/getAllUsers",
+    "getUser": "/getUser",
+    "deleteUser": "/deleteUser",
+    "createUser": "/createUser",
+    "editUser": "/editUser"
+}
