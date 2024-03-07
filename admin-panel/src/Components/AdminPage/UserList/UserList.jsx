@@ -1,4 +1,6 @@
 import testUsers from '../../../data/testUsers.json'
+import user_db_api_endpoints from '../../../data/user_db_api_endpoints.json'
+import urls from '../../../data/urls.json'
 import { UserListItem } from './UserListItem'
 import './UserList.css'
 import { UserListSearchBar } from './UserListSearchBar'
@@ -45,7 +47,7 @@ export function UserList({ editUserButtonHandler }) {
   async function searchButtonHandler(event, fieldName, fieldValue, usersPerPage) {
     event.preventDefault();
     try {
-      let endpoint; // The API endpoint to call.
+      const endpoint = `${urls.sqlDatabaseAPI}${user_db_api_endpoints.getAllUsers}`; // The API endpoint to call.
       let response; // The response from the server.
       let result; // The json result from the server.
       let params; // The params for the search.
@@ -59,9 +61,6 @@ export function UserList({ editUserButtonHandler }) {
       if (!usersPerPage) {
         throw new Error(`!usersPerPage`);
       }
-
-      // TODO: replace this with the real endpoint.
-      endpoint = 'endpoint';
 
       // Set the params
       params = {
