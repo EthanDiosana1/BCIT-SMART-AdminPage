@@ -4,7 +4,7 @@ import urls from '../../../data/urls.json'
 import { UserListItem } from './UserListItem'
 import './UserList.css'
 import { UserListSearchBar } from './UserListSearchBar'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 /** Displays a list of users.
  * Includes a search bar.
@@ -21,22 +21,58 @@ export function UserList({ editUserButtonHandler }) {
   const [fieldToSearch, setFieldToSearch] = useState('displayname');
   const [usersPerPage, setUsersPerPage] = useState(20);
 
-  /** Retrieves all users from the db. */
-  function getAllUsers() {
-    try {
-      if (!users) {
-        const dbResponse = testUsers.testUsers;
+  // new state for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-        setUsers(dbResponse);
-        return users;
-      }
-    } catch (error) {
-      console.log(error)
-    }
+// Fetch users when components mounts
+useEffect(() => {
+  // Initialize users with the test data or fetched data
+  const allUsers = testUsers.testUsers;
+  setUsers(allUsers);
+  setTotalPages(Math.ceil(allUsers.length / usersPerPage)); // Calculate total pages
+}, [usersPerPage]); // Depend on usersPerPage in case it changes
+
+// Calculate the current users to display
+const indexOfLastUser = currentPage * usersPerPage;
+const indexOfFirstUser = indexOfLastUser - usersPerPage;
+const currentUsers = users ? users.slice(indexOfFirstUser, indexOfLastUser) : [];
+
+// Handler to change page
+const paginate = (pageNumber) => {
+  setCurrentPage(pageNumber);
+};
+
+// Render pagination controls
+const renderPagination = () => {
+  let pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(
+      <button key={i} onClick={() => paginate(i)} className={currentPage === i ? 'active' : ''}>
+        {i}
+      </button>
+    );
   }
+  return <div className='pagination'>{pageNumbers}</div>;
+};
 
-  /** Get all of the users. */
-  getAllUsers(usersPerPage);
+
+  /** Retrieves all users from the db. */
+  // function getAllUsers() {
+  //   try {
+  //     if (!users) {
+  //       const dbResponse = testUsers.testUsers;
+
+  //       setUsers(dbResponse);
+  //       return users;
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // /** Get all of the users. */
+  // getAllUsers(usersPerPage);
 
   /** Handles the search bar being clicked.
    * 
@@ -128,18 +164,20 @@ export function UserList({ editUserButtonHandler }) {
           </tr>
         </thead>
         <tbody>
-          {users ?
-
-            users.map((user, index) => {
-
-              return <UserListItem
+        {currentUsers.length > 0 ? (
+            currentUsers.map((user, index) => (
+              <UserListItem
                 key={index}
                 user={user}
                 editUserButtonHandler={editUserButtonHandler}
               />
-            }) : <tr>No users to display.</tr>}
+))
+          ) : (
+            <tr><td colSpan="4">No users to display.</td></tr>
+          )}
         </tbody>
       </table>
+      {renderPagination()}
     </>
-  )
+  );
 }
