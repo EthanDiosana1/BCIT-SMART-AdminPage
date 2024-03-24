@@ -133,7 +133,7 @@ export function UserList({ editUserButtonHandler }) {
         onSearch={(event) => {
           searchButtonHandler(event, fieldToSearch, searchTerm, usersPerPage)
         }}
-        onReset={getAllUsers(usersPerPage)}
+        onReset={console.log("Running")}
         fieldName={fieldToSearch}
         setFieldName={setFieldToSearch}
 
