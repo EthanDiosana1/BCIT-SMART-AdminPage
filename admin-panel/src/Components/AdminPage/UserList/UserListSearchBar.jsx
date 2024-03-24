@@ -65,6 +65,7 @@ export function UserListSearchBar({
       <div>
         <button
           type='button'
+          onClick={onReset}
         >Reset</button>
       </div>
     </form>
