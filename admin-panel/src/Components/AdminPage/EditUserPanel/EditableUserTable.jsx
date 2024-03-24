@@ -17,6 +17,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
         <EditableFieldRow
           fieldName="DisplayName"
           fieldValue={user.name}
+          modalTitle={"Edit DisplayName"}
           modal={
           EditDisplayNameModal}
 //        />

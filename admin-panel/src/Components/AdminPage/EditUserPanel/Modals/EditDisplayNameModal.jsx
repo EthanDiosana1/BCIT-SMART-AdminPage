@@ -3,6 +3,7 @@ import Modal from "./Modal.jsx";
 import './Modal.css';
 
 export function EditDisplayNameModal({
+    title,
     fieldName, 
     textInputValue,
     handleChange,
@@ -13,7 +14,8 @@ export function EditDisplayNameModal({
   
     return (
     <Modal
-      isOpen={isOpen}
+      title={title}
+        isOpen={isOpen}
       onClose={() => {
         closeButtonHandler();
       }}

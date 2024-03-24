@@ -11,6 +11,7 @@ import { Modal } from "./Modals/Modal";
 export function EditableFieldRow({
   fieldName,
   fieldValue,
+  modalTitle,
   modal: ModalComponent,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,6 +34,7 @@ export function EditableFieldRow({
     <>
       {ModalComponent ? (
         <ModalComponent
+          title={modalTitle}
           fieldName={fieldName}
           fieldValue={fieldValue}
           textInputValue={textInputValue}
