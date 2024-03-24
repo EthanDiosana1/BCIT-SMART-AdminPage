@@ -1,11 +1,21 @@
 import React from "react";
-import { Modal } from "./Modals/Modal";
+import Modal from "./Modal.jsx";
+import './Modal.css';
 
-export function EditEmailModal(fieldName, 
-    textInputValue, setTextInputValue, isModalOpen) {
-  return (
+export function EditEmailModal({
+    title,
+    fieldName, 
+    textInputValue,
+    handleChange,
+    isOpen,
+    closeButtonHandler,
+    setTextInputValue
+}) {
+  
+    return (
     <Modal
-      isOpen={isModalOpen}
+      title={title}
+        isOpen={isOpen}
       onClose={() => {
         closeButtonHandler();
       }}
@@ -14,9 +24,8 @@ export function EditEmailModal(fieldName,
         type="email"
         placeholder={fieldName}
         value={textInputValue}
-        onChange={(event) => {
-          handleChange(event, setTextInputValue);
-        }}
+        onChange={(event) => 
+            handleChange(event, setTextInputValue)}
       />
     </Modal>
   );
