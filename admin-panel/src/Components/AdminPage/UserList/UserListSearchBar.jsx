@@ -25,7 +25,6 @@ export function UserListSearchBar({
     setFieldName(''); // Reset field name
     setFieldValue(''); // Reset field value
     setUsersPerPage(20); // Reset users per page
-    setUsers(null); // Clear the user list by setting it to null
   }
 
   return (
