@@ -20,13 +20,6 @@ export function UserListSearchBar({
     }
   }
 
-  function handleReset(event) {
-    event.preventDefault();
-    setFieldName(''); // Reset field name
-    setFieldValue(''); // Reset field value
-    setUsersPerPage(20); // Reset users per page
-  }
-
   return (
     <form className='user-list-search-bar' onSubmit={onSearch}>
       <div>
@@ -71,7 +64,7 @@ export function UserListSearchBar({
       </div>
       <div>
         <button
-          type='button' onClick={handleReset}
+          type='button'
         >Reset</button>
       </div>
     </form>
