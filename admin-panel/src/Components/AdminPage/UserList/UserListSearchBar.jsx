@@ -4,7 +4,9 @@ export function UserListSearchBar({
   fieldName, setFieldName,
   fieldValue, setFieldValue,
   usersPerPage, setUsersPerPage,
-  onSearch }) {
+  onSearch,
+  onReset 
+}) {
   /**
    *
    * @param {*} event
@@ -16,6 +18,14 @@ export function UserListSearchBar({
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function handleReset(event) {
+    event.preventDefault();
+    setFieldName(''); // Reset field name
+    setFieldValue(''); // Reset field value
+    setUsersPerPage(20); // Reset users per page
+    onReset(); // Call the onReset function passed as a prop
   }
 
   return (
@@ -59,6 +69,11 @@ export function UserListSearchBar({
         <button
           type='submit'
         >Search</button>
+      </div>
+      <div>
+        <button
+          type='button' onClick={handleReset}
+        >Reset</button>
       </div>
     </form>
   )
