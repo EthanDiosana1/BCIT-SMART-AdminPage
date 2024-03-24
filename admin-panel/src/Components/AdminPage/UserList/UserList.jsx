@@ -24,9 +24,6 @@ export function UserList({ editUserButtonHandler }) {
   /** Retrieves all users from the db. */
   async function getAllUsers() {
   try {
-    console.log("From async getAll");
-    // clear users
-    users = null;
     if (!users) {
       const endpoint = `${urls.sqlDatabaseAPI}/getUsers`; // Fix the string interpolation syntax
       const response = await fetch(endpoint, {
@@ -55,6 +52,32 @@ export function UserList({ editUserButtonHandler }) {
     }
   } catch (error) {
     console.error(error); // Change console.log to console.error for better visibility of errors
+  }
+
+  async function resetUserTable() {
+    try {
+      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error! Response status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!Array.isArray(result)) {
+        throw new Error(`Response is not an array.`);
+      }
+
+      setUsers(result);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
@@ -136,7 +159,7 @@ export function UserList({ editUserButtonHandler }) {
         onSearch={(event) => {
           searchButtonHandler(event, fieldToSearch, searchTerm, usersPerPage)
         }}
-        onReset={() => getAllUsers(usersPerPage)}
+        onReset={() => resetUserTable(usersPerPage)}
         fieldName={fieldToSearch}
         setFieldName={setFieldToSearch}
 
