@@ -1,49 +1,108 @@
 .modal-overlay {
-    /* position */
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
 
-    /* flex options */
     display: flex;
     justify-content: center;
     align-items: center;
 
-    /* size */
     height: 100%;
     width: 100%;
 
-    /* color */
     background-color: rgba(0, 0, 0, 0.671);
 
-    /* other */
     user-select: none;
-}
+
+    backdrop-filter: blur(3px); /* Adds blur effect */
+} 
 
 .modal-content {
     z-index: 1001;
 
-    /* flex options */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    /* size */
     min-height: 300px;
     max-height: 300px;
     min-width: 300px;
     max-width: 300px;
 
-    /* border */
     border: 1px solid white;
     border-radius: 5px;
 
-    /* color */
     color: white;
     background-color: rgba(0, 0, 0, 0.697);
 
-    /* Ensure that pointer events are enabled for the modal content */
     pointer-events: all;
+
+    padding: 30px 0px 30px 0px; /* Adds more padding */
+    font-family: 'Helvetica Neue', sans-serif; /* Modern font */
+
+}  
+
+.modal-content * {
+    border-radius: 5px;
+    width: 70%;
+    padding: 6px;
+
 }
+
+.modal-button-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 20px;
+    padding: 30px;
+    width: 60%;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth background transition */
+
+    color:white;
+    gap: 20px;
+    /*border: 1px solid white;*/
+
+}
+
+.modal-button-container button{
+    color:white;
+    outline: none;
+
+    padding: 8px;
+    margin-right: 8px;
+
+
+
+}
+
+.modal-button-container button:hover {
+    opacity: 1; /* Hover effect */
+}
+
+
+
+
+
+.modal-button-container button.cancel-button {
+    background-color: transparent;
+    border: 1px solid red;
+}
+
+.modal-button-container button.submit-button {
+    background-color: transparent; 
+    border: 1px solid green;
+}
+
+
+
+
+
+
