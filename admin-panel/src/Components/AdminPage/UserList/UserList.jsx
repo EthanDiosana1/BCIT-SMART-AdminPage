@@ -53,34 +53,30 @@ export function UserList({ editUserButtonHandler }) {
   } catch (error) {
     console.error(error); // Change console.log to console.error for better visibility of errors
   }
-
-  /**
-   * Resets user table to initial state
-   */
-  async function resetUserTable() {
-    try {
-      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
-      const response = await fetch(endpoint, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error! Response status: ${response.status}`);
+}
+async function resetUserTable() {
+  try {
+    const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
       }
+    });
 
-      const result = await response.json();
-
-      if (!Array.isArray(result)) {
-        throw new Error(`Response is not an array.`);
-      }
-
-      setUsers(result);
-    } catch (error) {
-      console.error(error);
+    if (!response.ok) {
+      throw new Error(`Error! Response status: ${response.status}`);
     }
+
+    const result = await response.json();
+
+    if (!Array.isArray(result)) {
+      throw new Error(`Response is not an array.`);
+    }
+
+    setUsers(result);
+  } catch (error) {
+    console.error(error);
   }
 }
 
