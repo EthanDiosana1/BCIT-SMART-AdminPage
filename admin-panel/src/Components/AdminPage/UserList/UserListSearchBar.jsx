@@ -6,9 +6,9 @@ export function UserListSearchBar({
   usersPerPage, setUsersPerPage,
   onSearch }) {
   /**
-   * 
-   * @param {*} event 
-   * @param {*} state 
+   *
+   * @param {*} event
+   * @param {*} state
    */
   async function handleChange(event, state) {
     try {
@@ -39,8 +39,8 @@ export function UserListSearchBar({
           value={fieldName}
           onChange={(event) => handleChange(event, setFieldName)}
           required>
-          <option value='id'>id</option>
-          <option value='displayname'>displayname</option>
+          <option value='user_id'>id</option>
+          <option value='display_name'>displayname</option>
           <option value='email'>email</option>
         </select>
       </div>
@@ -63,3 +63,4 @@ export function UserListSearchBar({
     </form>
   )
 }
+

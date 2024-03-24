@@ -10,8 +10,8 @@ export function UserListItem({ user, editUserButtonHandler }) {
 
   return (
     <tr className='user-list-item'>
-      <td>{user.id}</td>
-      <td>{user.name}</td>
+      <td>{user.user_id}</td>
+      <td>{user.display_name}</td>
       <td>{user.email}</td>
       <td>
         <EditUserButton

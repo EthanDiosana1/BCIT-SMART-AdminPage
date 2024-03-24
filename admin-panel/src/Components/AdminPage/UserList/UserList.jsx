@@ -18,22 +18,43 @@ export function UserList({ editUserButtonHandler }) {
 
   // Search bar params.
   const [searchTerm, setSearchTerm] = useState('');
-  const [fieldToSearch, setFieldToSearch] = useState('displayname');
+  const [fieldToSearch, setFieldToSearch] = useState('user_id');
   const [usersPerPage, setUsersPerPage] = useState(20);
 
   /** Retrieves all users from the db. */
-  function getAllUsers() {
-    try {
-      if (!users) {
-        const dbResponse = testUsers.testUsers;
+  async function getAllUsers() {
+  try {
+    if (!users) {
+      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`; // Fix the string interpolation syntax
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-        setUsers(dbResponse);
-        return users;
+      if (!response.ok) {
+        throw new Error(`Error! Response status: ${response.status}`);
       }
-    } catch (error) {
-      console.log(error)
+
+      // Convert to json.
+      const result = await response.json(); // Declare result variable
+
+      // Throw error if response is not array.
+      if (!Array.isArray(result)) {
+        throw new Error(`Response is not an array.`);
+      }
+
+      console.trace(result);
+
+      // Set the current user list.
+      setUsers(result); // Update state with response data
     }
+  } catch (error) {
+    console.error(error); // Change console.log to console.error for better visibility of errors
   }
+}
+
 
   /** Get all of the users. */
   getAllUsers(usersPerPage);
@@ -45,60 +66,66 @@ export function UserList({ editUserButtonHandler }) {
    * @param {number} usersPerPage The number of users per page.
    */
   async function searchButtonHandler(event, fieldName, fieldValue, usersPerPage) {
-    event.preventDefault();
-    try {
-      const endpoint = `${urls.sqlDatabaseAPI}${user_db_api_endpoints.getAllUsers}`; // The API endpoint to call.
-      let response; // The response from the server.
-      let result; // The json result from the server.
-      let params; // The params for the search.
+  event.preventDefault();
+  try {
+    const endpoint = `${urls.sqlDatabaseAPI}/getUser`; // The API endpoint to call.
+    let response; // The response from the server.
+    let result; // The json result from the server.
+    let params; // The params for the search.
 
-      if (!fieldName) {
-        throw new Error(`!fieldName`);
-      }
-      if (!fieldValue) {
-        throw new Error(`!fieldValue`);
-      }
-      if (!usersPerPage) {
-        throw new Error(`!usersPerPage`);
-      }
-
-      // Set the params
-      params = {
-        'fieldName': fieldName,
-        'fieldValue': fieldValue,
-        'usersPerPage': usersPerPage
-      }
-
-      // Get the response from the server.
-      response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(params)
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error! Response status: ${response.status}`);
-      }
-
-      // Convert to json.
-      result = await response.json();
-
-      // Throw error if response is not array.
-      if (!result) {
-        throw new Error(`result is ${result}`);
-      }
-
-      console.trace(result);
-
-      // Set the current user list.
-      setUsers(response);
-
-    } catch (error) {
-      console.log(error);
+    if (!fieldName) {
+      throw new Error(`!fieldName`);
     }
+    if (!fieldValue) {
+      throw new Error(`!fieldValue`);
+    }
+    if (!usersPerPage) {
+      throw new Error(`!usersPerPage`);
+    }
+
+    // Set the params
+    params = {
+      'fieldName': fieldName,
+      'fieldValue': fieldValue,
+      'usersPerPage': usersPerPage
+    }
+    console.log("Field value: " + fieldValue);
+    console.log("Field name: " + fieldName);
+    // Construct the query string
+    const queryString = `?${fieldName}=${fieldValue}`;
+    //const queryString = `?user_id=1`;
+    // Get the response from the server.
+    console.log(endpoint + queryString);
+
+    response = await fetch(endpoint + queryString, {
+      method: 'GET', // Change method to GET
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // No need to include params in the body for a GET request
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error! Response status: ${response.status}`);
+    }
+
+    // Convert to json.
+    result = await response.json();
+
+    // Throw error if response is not array.
+    if (!result) {
+      throw new Error(`result is ${result}`);
+    }
+
+    console.trace(result);
+
+    // Set the current user list.
+    setUsers(result); // Update state with response data
+
+  } catch (error) {
+    console.log(error);
   }
+} 
 
   return (
     <>
@@ -143,3 +170,4 @@ export function UserList({ editUserButtonHandler }) {
     </>
   )
 }
+
