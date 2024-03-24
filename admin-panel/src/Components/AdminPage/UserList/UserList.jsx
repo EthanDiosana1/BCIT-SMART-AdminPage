@@ -1,9 +1,9 @@
-//import user_db_api_endpoints from '../../../data/user_db_api_endpoints.json'
-import urls from '../../../data/urls.json'
-import { UserListItem } from './UserListItem'
-import './UserList.css'
-import { UserListSearchBar } from './UserListSearchBar'
-import React, { useState, useEffect } from 'react'
+import urls from '../../../data/urls.json';
+import { UserListItem } from './UserListItem';
+import './UserList.css';
+import { UserListSearchBar } from './UserListSearchBar';
+import React, { useState, useEffect } from 'react';
+import PageButton from './PageButton';
 
 export function UserList({ editUserButtonHandler }) {
   const [users, setUsers] = useState(null);
@@ -15,7 +15,7 @@ export function UserList({ editUserButtonHandler }) {
   const [jumpToPage, setJumpToPage] = useState('');
 
   useEffect(() => {
-    getAllUsers(usersPerPage);
+    getAllUsers();
   }, [usersPerPage, currentPage]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function UserList({ editUserButtonHandler }) {
     }
   }, [users, usersPerPage]);
 
-  async function getAllUsers(usersPerPage) {
+  async function getAllUsers() {
     try {
       const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
       const response = await fetch(endpoint, {
@@ -84,32 +84,7 @@ export function UserList({ editUserButtonHandler }) {
     setCurrentPage(pageNumber);
   };
 
-  const renderPagination = () => {
-    return (
-      <div className='pagination'>
-        <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>|&lt;</button>
-        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>&lt;</button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>&gt;</button>
-        <button onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>&gt;|</button>
-        <form onSubmit={handleJumpToPage}>
-          <label>
-            Jump to page:
-            <input
-              type="number"
-              value={jumpToPage}
-              onChange={e => setJumpToPage(e.target.value)}
-              min="1"
-              max={totalPages}
-              step="1"
-            />
-          </label>
-          <button type="submit">Go</button>
-        </form>
-      </div>
-    );
-  };
-
+  
   return (
     <>
       <UserListSearchBar
@@ -147,7 +122,14 @@ export function UserList({ editUserButtonHandler }) {
         </tbody>
       </table>
 
-      {totalPages > 1 && renderPagination()}
+      { <PageButton
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handleJumpToPage={handleJumpToPage}
+        setJumpToPage={setJumpToPage}
+        jumpToPage={jumpToPage}
+      />}
     </>
   );
 }
