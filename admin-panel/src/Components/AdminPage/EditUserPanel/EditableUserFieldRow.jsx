@@ -5,8 +5,6 @@ import { Modal } from "./Modals/Modal";
 /** Displays the name and value of a user's
  * field and a button to edit it.
  *
- * TODO: make this a generic component called 'EditableFieldRow'
- *
  * @param {*} param0
  * @returns
  */
@@ -40,8 +38,7 @@ export function EditableFieldRow({
           textInputValue={textInputValue}
           handleChange={handleChange}
           closeButtonHandler={closeButtonHandler}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
+          isOpen={isModalOpen}
           setTextInputValue={setTextInputValue}
         />
       ) : null}

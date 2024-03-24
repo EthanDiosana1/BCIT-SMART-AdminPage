@@ -2,7 +2,7 @@ import React, { Children, useEffect } from 'react';
 import './Modal.css';
 import ReactDOM from 'react-dom';
 
-export function Modal({ isOpen, onClose, onChange, children }) {
+export default function Modal({ isOpen, onClose, onChange, children }) {
     if (!isOpen) return null;
 
     return ReactDOM.createPortal(

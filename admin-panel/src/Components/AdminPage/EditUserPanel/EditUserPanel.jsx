@@ -12,7 +12,7 @@ export function EditUserPanel({ user, backButtonHandler, deleteUserButtonHandler
         <div className='edit-user-panel'>
             <div>
                 <button onClick={() => backButtonHandler()}>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
             <h1>UserId: {user.id}</h1>

@@ -1,11 +1,19 @@
 import React from "react";
-import { Modal } from "./Modal.jsx";
+import Modal from "./Modal.jsx";
+import './Modal.css';
 
-export function EditDisplayNameModal(fieldName, 
-    textInputValue, handleChange, isModalOpen) {
-  return (
+export function EditDisplayNameModal({
+    fieldName, 
+    textInputValue,
+    handleChange,
+    isOpen,
+    closeButtonHandler,
+    setTextInputValue
+}) {
+  
+    return (
     <Modal
-      isOpen={isModalOpen}
+      isOpen={isOpen}
       onClose={() => {
         closeButtonHandler();
       }}
@@ -15,7 +23,7 @@ export function EditDisplayNameModal(fieldName,
         placeholder={fieldName}
         value={textInputValue}
         onChange={(event) => 
-            handleChange(event, state)}
+            handleChange(event, setTextInputValue)}
       />
     </Modal>
   );

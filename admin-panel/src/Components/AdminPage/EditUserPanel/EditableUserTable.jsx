@@ -18,17 +18,17 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
           fieldName="DisplayName"
           fieldValue={user.name}
           modal={
-          <EditDisplayNameModal/>}
-        />
-        <EditableFieldRow
-          fieldName="Password"
-          fieldValue={"HASHED PASSWORD"}
-          modal={EditPasswordModal}
-        />
-        <EditableFieldRow
-          fieldName="Email"
-          fieldValue={user.email}
-          modal={EditEmailModal}
+          EditDisplayNameModal}
+//        />
+//        <EditableFieldRow
+//          fieldName="Password"
+//          fieldValue={"HASHED PASSWORD"}
+//          modal={EditPasswordModal}
+//        />
+//        <EditableFieldRow
+//          fieldName="Email"
+//          fieldValue={user.email}
+//          modal={EditEmailModal}
         />
         <tr>
           <td></td>
