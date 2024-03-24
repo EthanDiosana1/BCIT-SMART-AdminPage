@@ -4,7 +4,7 @@ import urls from '../../../data/urls.json'
 import { UserListItem } from './UserListItem'
 import './UserList.css'
 import { UserListSearchBar } from './UserListSearchBar'
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 /** Displays a list of users.
  * Includes a search bar.
@@ -13,9 +13,11 @@ import React, { useState, useEffect } from 'react'
  * @returns
  */
 export function UserList({ editUserButtonHandler }) {
-  const [users, setUsers] = useState(null);/** Contains the users list. */
+  /** Contains the users list. */
+  const [users, setUsers] = useState(null);
+
+  // Search bar params.
   const [searchTerm, setSearchTerm] = useState('');
-<<<<<<< HEAD
   const [fieldToSearch, setFieldToSearch] = useState('user_id');
   const [usersPerPage, setUsersPerPage] = useState(20);
 
@@ -78,67 +80,9 @@ async function resetUserTable() {
   }
 }
 
-=======
-  const [fieldToSearch, setFieldToSearch] = useState('displayname');
-  const [usersPerPage, setUsersPerPage] = useState(20);// Search bar params.
-  const [currentPage, setCurrentPage] = useState(1);// new state for pagination
-  const [totalPages, setTotalPages] = useState(0); // state for total number of pages
-  const [jumpToPage, setJumpToPage] = useState('');
 
-// Fetch users when components mounts
-useEffect(() => {
-  const allUsers = testUsers.testUsers;  // Initialize users with the test data or fetched data
-  setUsers(allUsers);
-  setTotalPages(Math.ceil(allUsers.length / usersPerPage)); // Calculate total pages
-}, [usersPerPage]); // Depend on usersPerPage in case it changes
-
-// Calculate the current users to display
-const indexOfLastUser = currentPage * usersPerPage;
-const indexOfFirstUser = indexOfLastUser - usersPerPage;
-const currentUsers = users ? users.slice(indexOfFirstUser, indexOfLastUser) : [];
->>>>>>> origin/6-page-button-functionality-for-admin-panel
-
-//const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const nextPage = () => setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages));
-
-  const previousPage = () => setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
-
-  const firstPage = () => setCurrentPage(1);
-
-  const lastPage = () => setCurrentPage(totalPages);
-
-  const handleJumpToPage = (event) => {
-    event.preventDefault();
-    const pageNumber = Math.max(1, Math.min(totalPages, Number(jumpToPage)));
-    setCurrentPage(pageNumber);
-  };
-
-  const renderPagination = () => {
-    return (
-      <div className='pagination'>
-        <button onClick={firstPage} disabled={currentPage === 1}>|&lt;</button>
-        <button onClick={previousPage} disabled={currentPage === 1}>&lt;</button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={nextPage} disabled={currentPage === totalPages}>&gt;</button>
-        <button onClick={lastPage} disabled={currentPage === totalPages}>&gt;|</button>
-        <form onSubmit={handleJumpToPage}>
-          <label>
-            Jump to page:
-            <input
-              type="number"
-              value={jumpToPage}
-              onChange={e => setJumpToPage(e.target.value)}
-              min="1"
-              max={totalPages}
-              step="1"
-            />
-          </label>
-          <button type="submit">Go</button>
-        </form>
-      </div>
-    );
-  };
+  /** Get all of the users. */
+  getAllUsers(usersPerPage);
 
   /** Handles the search bar being clicked.
    * 
@@ -226,7 +170,7 @@ const currentUsers = users ? users.slice(indexOfFirstUser, indexOfLastUser) : []
       />
 
 
-<table className='user-list'>
+      <table className='user-list'>
         <thead>
           <tr>
             <th>ID</th>
@@ -236,21 +180,19 @@ const currentUsers = users ? users.slice(indexOfFirstUser, indexOfLastUser) : []
           </tr>
         </thead>
         <tbody>
-          {currentUsers.length > 0 ? (
-            currentUsers.map((user, index) => (
-              <UserListItem
+          {users ?
+
+            users.map((user, index) => {
+
+              return <UserListItem
                 key={index}
                 user={user}
                 editUserButtonHandler={editUserButtonHandler}
               />
-            ))
-          ) : (
-            <tr><td colSpan="4">No users to display.</td></tr>
-          )}
+            }) : <tr>No users to display.</tr>}
         </tbody>
       </table>
-      {renderPagination()}
     </>
-  );
+  )
 }
 
