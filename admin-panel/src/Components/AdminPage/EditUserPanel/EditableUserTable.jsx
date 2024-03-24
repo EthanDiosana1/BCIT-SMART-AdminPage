@@ -42,7 +42,8 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
           <td></td>
           <td>
             <DeleteUserButton 
-            onClick={() => deleteUserButtonHandler()} />
+            handleClick={() => deleteUserButtonHandler()} 
+      />
           </td>
         </tr>
       </tbody>

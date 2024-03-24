@@ -5,7 +5,7 @@ import './DeleteUserButton.css';
  * @param {*} props 
  * @returns 
  */
-export function DeleteUserButton({ handleClick,  }) {
+export function DeleteUserButton({ handleClick }) {
     return (<button
         onClick={handleClick}
         className="delete-user-button">
