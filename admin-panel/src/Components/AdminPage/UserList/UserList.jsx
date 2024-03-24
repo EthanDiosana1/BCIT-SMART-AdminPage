@@ -54,6 +54,9 @@ export function UserList({ editUserButtonHandler }) {
     console.error(error); // Change console.log to console.error for better visibility of errors
   }
 
+  /**
+   * Resets user table to initial state
+   */
   async function resetUserTable() {
     try {
       const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
@@ -159,7 +162,7 @@ export function UserList({ editUserButtonHandler }) {
         onSearch={(event) => {
           searchButtonHandler(event, fieldToSearch, searchTerm, usersPerPage)
         }}
-        onReset={() => resetUserTable(usersPerPage)}
+        onReset={resetUserTable}
         fieldName={fieldToSearch}
         setFieldName={setFieldToSearch}
 
