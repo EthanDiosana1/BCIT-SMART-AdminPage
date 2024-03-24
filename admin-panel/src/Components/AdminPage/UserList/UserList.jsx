@@ -23,35 +23,30 @@ export function UserList({ editUserButtonHandler }) {
 
   /** Retrieves all users from the db. */
   async function getAllUsers() {
-  try {
-    if (!users) {
-      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`; // Fix the string interpolation syntax
+    try {
+      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
+  
       const response = await fetch(endpoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       });
-
+  
       if (!response.ok) {
         throw new Error(`Error! Response status: ${response.status}`);
       }
-
-      // Convert to json.
-      const result = await response.json(); // Declare result variable
-
-      // Throw error if response is not array.
+  
+      const result = await response.json();
+  
       if (!Array.isArray(result)) {
         throw new Error(`Response is not an array.`);
       }
-
-      console.trace(result);
-
-      // Set the current user list.
-      setUsers(result); // Update state with response data
+  
+      setUsers(result);
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error); // Change console.log to console.error for better visibility of errors
   }
 }
 
