@@ -26,7 +26,7 @@ export function UserList({ editUserButtonHandler }) {
   try {
     console.log("From async getAll");
     // clear users
-    users = useState(null);
+    users = null;
     if (!users) {
       const endpoint = `${urls.sqlDatabaseAPI}/getUsers`; // Fix the string interpolation syntax
       const response = await fetch(endpoint, {
