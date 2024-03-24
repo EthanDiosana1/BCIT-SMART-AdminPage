@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "./Modals/Modal";
+import { Modal } from "./Modal.jsx";
 
 export function EditDisplayNameModal(fieldName, 
     textInputValue, handleChange, isModalOpen) {
