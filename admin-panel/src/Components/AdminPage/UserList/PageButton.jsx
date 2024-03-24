@@ -11,7 +11,7 @@
         <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>&lt;</button>
         <span>Page {currentPage} of {totalPages}</span>
         <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>&gt;</button>
-        <button onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>&gt;|</button>
+        <button onClick={() => setCurrentPage(totalPages - 1)} disabled={currentPage === totalPages}>&gt;|</button>
         <form onSubmit={handleJumpToPage}>
           <label>
             Jump to page:
