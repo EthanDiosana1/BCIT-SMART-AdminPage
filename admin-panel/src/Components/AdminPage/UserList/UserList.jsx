@@ -23,30 +23,35 @@ export function UserList({ editUserButtonHandler }) {
 
   /** Retrieves all users from the db. */
   async function getAllUsers() {
-    try {
-      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
-  
+  try {
+    if (!users) {
+      const endpoint = `${urls.sqlDatabaseAPI}/getUsers`; // Fix the string interpolation syntax
       const response = await fetch(endpoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       });
-  
+
       if (!response.ok) {
         throw new Error(`Error! Response status: ${response.status}`);
       }
-  
-      const result = await response.json();
-  
+
+      // Convert to json.
+      const result = await response.json(); // Declare result variable
+
+      // Throw error if response is not array.
       if (!Array.isArray(result)) {
         throw new Error(`Response is not an array.`);
       }
-  
-      setUsers(result);
-    } catch (error) {
-      console.error(error);
+
+      console.trace(result);
+
+      // Set the current user list.
+      setUsers(result); // Update state with response data
     }
+  } catch (error) {
+    console.error(error); // Change console.log to console.error for better visibility of errors
   }
 }
 
@@ -128,7 +133,7 @@ export function UserList({ editUserButtonHandler }) {
         onSearch={(event) => {
           searchButtonHandler(event, fieldToSearch, searchTerm, usersPerPage)
         }}
-        onReset={getAllUsers}
+        onReset={() => getAllUsers(usersPerPage)}
         fieldName={fieldToSearch}
         setFieldName={setFieldToSearch}
 
@@ -164,5 +169,5 @@ export function UserList({ editUserButtonHandler }) {
       </table>
     </>
   )
-
+}
 
