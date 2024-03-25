@@ -67,8 +67,8 @@ export function UserList({ editUserButtonHandler }) {
     }
   }
   async function updateUsers(limit, offset) {
-    try {
-      if (!users) {
+    console.log('updateUsers working');
+      try {
         const endpoint = `${urls.sqlDatabaseAPI}/getUsers?limit=${limit}&offset=${offset}`
         const response = await fetch(endpoint, {
           method: 'GET',
@@ -89,9 +89,8 @@ export function UserList({ editUserButtonHandler }) {
 
         setUsers(result);
         console.log(limit, offset, result);
-      }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
