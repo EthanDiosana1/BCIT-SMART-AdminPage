@@ -18,6 +18,9 @@ export function UserList({ editUserButtonHandler }) {
   /** Contains the users list. */
   const [users, setUsers] = useState(null);
 
+  /** The total number of users in the database */
+  const [numUsersDb, setNumUsersDb] = useState(null);
+
   // Search bar params.
   const [searchTerm, setSearchTerm] = useState('');
   const [fieldToSearch, setFieldToSearch] = useState('user_id');
@@ -31,11 +34,6 @@ export function UserList({ editUserButtonHandler }) {
     updateUsers(usersPerPage, 0);
   }, [usersPerPage, currentPage]);
 
-  useEffect(() => {
-    if (users) {
-      setTotalPages(Math.ceil(users.length / usersPerPage));
-    }
-  }, [users, usersPerPage]);
 
 
 
@@ -66,8 +64,37 @@ export function UserList({ editUserButtonHandler }) {
       console.error(error);
     }
   }
+
+  async function getNumPages() {
+      try {
+
+          // Post to the endpoint
+          const endpoint = `${urls.sqlDatabaseAPI}/getNumUsers`;
+
+          const response = await fetch(endpoint, {
+              method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                     }
+                });
+
+        if (!response.ok) {
+          throw new Error(`Error! Response status: ${response.status}`);
+        }
+
+          const json = await response.json();
+
+           const numUsers = json.count;
+
+          // Set the number of users
+          setNumUsersDb(numUsers);
+
+      } catch(error) {
+            console.error(error);
+      }
+  }
+
   async function updateUsers(limit, offset) {
-    console.log('updateUsers working');
       try {
         const endpoint = `${urls.sqlDatabaseAPI}/getUsers?limit=${limit}&offset=${offset}`
         const response = await fetch(endpoint, {
@@ -87,10 +114,18 @@ export function UserList({ editUserButtonHandler }) {
           throw new Error(`Response is not an array.`);
         }
 
+          // Set the user list
         setUsers(result);
-        console.log(limit, offset, result);
+
+          getNumPages();
+
+          const numPages = Math.ceil(numUsersDb/usersPerPage);
+
+          // Set the number of pages
+          setTotalPages(numPages);
+
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

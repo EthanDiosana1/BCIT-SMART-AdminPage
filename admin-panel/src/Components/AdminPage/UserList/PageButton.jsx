@@ -1,32 +1,50 @@
  export default function PageButton({
     setCurrentPage,
-     currentPage,
-     totalPages, 
-      handleJumpToPage,
-      setJumpToPage,
-       jumpToPage}){
+    currentPage,
+    totalPages, 
+    handleJumpToPage,
+    setJumpToPage,
+    jumpToPage}){
 
         function handleUp()
         {
-          
+          // Get the current limit and offset
 
 
         }
 
         function handleDown()
         {
-          
+          // Get the current limit and offset
 
         }
 
 
     return (
       <div className='pagination'>
-        <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>|&lt;</button>
-        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>&lt;</button>
+        
+        <button 
+            onClick={() => setCurrentPage(1)} 
+            disabled={currentPage === 1}>|&lt;
+        </button>
+        
+        <button 
+            onClick={() => setCurrentPage(currentPage - 1)} 
+            disabled={currentPage === 1}>&lt;
+        </button>
+
         <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>&gt;</button>
-        <button onClick={() => setCurrentPage(totalPages - 1)} disabled={currentPage === totalPages}>&gt;|</button>
+        
+        <button 
+            onClick={() => setCurrentPage(currentPage + 1)} 
+            disabled={currentPage === totalPages}>&gt;
+        </button>
+        
+         <button 
+            onClick={() => setCurrentPage(totalPages - 1)} 
+            disabled={currentPage === totalPages}>&gt;|
+         </button>
+
         <form onSubmit={handleJumpToPage}>
           <label>
             Jump to page:
