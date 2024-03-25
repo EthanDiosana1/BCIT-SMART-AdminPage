@@ -184,6 +184,8 @@ export function UserList({ editUserButtonHandler }) {
 
           usersPerPage={usersPerPage}
           setUsersPerPage={setUsersPerPage}
+
+          updateUsers={updateUsers}
         />
 
         <table className='user-list'>
