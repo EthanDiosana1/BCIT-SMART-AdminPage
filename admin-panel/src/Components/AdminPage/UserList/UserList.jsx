@@ -34,11 +34,6 @@ export function UserList({ editUserButtonHandler }) {
     updateUsers(usersPerPage, 0);
   }, [usersPerPage, currentPage]);
 
-
-
-
-  /** Retrieves all users from the db. */
-
   async function resetUserTable() {
     try {
       const endpoint = `${urls.sqlDatabaseAPI}/getUsers`;
@@ -94,8 +89,10 @@ export function UserList({ editUserButtonHandler }) {
       }
   }
 
-  async function updateUsers(limit, offset) {
+  async function updateUsers(limit) {
       try {
+        const offset = currentPage * usersPerPage;
+
         const endpoint = `${urls.sqlDatabaseAPI}/getUsers?limit=${limit}&offset=${offset}`
         const response = await fetch(endpoint, {
           method: 'GET',
@@ -122,7 +119,7 @@ export function UserList({ editUserButtonHandler }) {
           const numPages = Math.ceil(numUsersDb/usersPerPage);
 
           // Set the number of pages
-          setTotalPages(numPages);
+            setTotalPages(numPages-1);
 
     } catch (error) {
       console.error(error);
@@ -251,10 +248,9 @@ export function UserList({ editUserButtonHandler }) {
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
           totalPages={totalPages}
-          handleJumpToPage={handleJumpToPage}
-          setJumpToPage={setJumpToPage}
           setUsersPerPage={setUsersPerPage}
-          jumpToPage={jumpToPage}
+          usersPerPage={usersPerPage}
+          updateUsers={updateUsers}
         />}
       </>
     );

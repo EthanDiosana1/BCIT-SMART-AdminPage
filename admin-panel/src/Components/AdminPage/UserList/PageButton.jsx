@@ -2,56 +2,68 @@
     setCurrentPage,
     currentPage,
     totalPages, 
-    handleJumpToPage,
-    setJumpToPage,
-    jumpToPage}){
+    usersPerPage,
+    updateUsers
+ })
+{
 
-        function handleUp()
-        {
-          // Get the current limit and offset
+     /**
+      * Handles a change in page number.
+      * @param newPageNumber the new page number
+      */
+     function handlePageChange(newPageNumber) {
 
-
+        // If the new page number is negative,
+        // set it to 1
+        if(newPageNumber < 1) {
+            newPageNumber = 1;
         }
 
-        function handleDown()
-        {
-          // Get the current limit and offset
-
+         // Prevent overflow of pages.
+         else if(newPageNumber > totalPages) {
+            newPageNumber = totalPages;
         }
+        
+        // Set the current page
+        setCurrentPage(newPageNumber);
+        
+        // Get the users on that page.
+        updateUsers(usersPerPage);
+     }
 
 
     return (
       <div className='pagination'>
         
         <button 
-            onClick={() => setCurrentPage(1)} 
+            onClick={() => handlePageChange(1)} 
             disabled={currentPage === 1}>|&lt;
         </button>
         
         <button 
-            onClick={() => setCurrentPage(currentPage - 1)} 
+            onClick={() => handlePageChange(currentPage - 1)} 
             disabled={currentPage === 1}>&lt;
         </button>
 
         <span>Page {currentPage} of {totalPages}</span>
         
         <button 
-            onClick={() => setCurrentPage(currentPage + 1)} 
+            onClick={() => handlePageChange(currentPage + 1)} 
             disabled={currentPage === totalPages}>&gt;
         </button>
         
          <button 
-            onClick={() => setCurrentPage(totalPages - 1)} 
+            onClick={() => handlePageChange(totalPages - 1)} 
             disabled={currentPage === totalPages}>&gt;|
          </button>
 
-        <form onSubmit={handleJumpToPage}>
+        <form onSubmit={handlePageChange}>
           <label>
             Jump to page:
             <input
               type="number"
-              value={jumpToPage}
-              onChange={e => setJumpToPage(e.target.value)}
+              value={currentPage}
+              onChange={e => handlePageChange(e.target.value)}
               min="1"
               max={totalPages}
               step="1"
