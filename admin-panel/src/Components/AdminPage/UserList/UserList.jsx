@@ -88,6 +88,7 @@ export function UserList({ editUserButtonHandler }) {
         }
 
         setUsers(result);
+        console.log(limit, offset, result);
       }
     } catch (error) {
       console.error(error);
