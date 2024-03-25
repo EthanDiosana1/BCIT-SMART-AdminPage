@@ -5,6 +5,21 @@
       handleJumpToPage,
       setJumpToPage,
        jumpToPage}){
+
+        function handleUp()
+        {
+          
+
+
+        }
+
+        function handleDown()
+        {
+          
+
+        }
+
+
     return (
       <div className='pagination'>
         <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>|&lt;</button>

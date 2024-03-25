@@ -5,7 +5,8 @@ export function UserListSearchBar({
   fieldValue, setFieldValue,
   usersPerPage, setUsersPerPage,
   onSearch,
-  onReset 
+  onReset,
+  updateUsers 
 }) {
   /**
    *
@@ -19,6 +20,12 @@ export function UserListSearchBar({
       console.log(error);
     }
   }
+
+  async function handleNumUsersChange(event, state){
+    handleChange(event, state);
+    updateUsers(usersPerPage, 0);
+  }
+
 
   return (
     <form className='user-list-search-bar' onSubmit={onSearch}>
@@ -52,7 +59,7 @@ export function UserListSearchBar({
           id='numUsersPerPage'
           type='number'
           value={usersPerPage}
-          onChange={(event) => handleChange(event, setUsersPerPage)}
+          onChange={(event) => handleNumUsersChange(event, setUsersPerPage)}
           placeholder='users/page'
           required
         />
