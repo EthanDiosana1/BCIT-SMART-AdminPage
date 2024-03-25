@@ -208,7 +208,7 @@ export function UserList({ editUserButtonHandler }) {
                   user={user}
                   editUserButtonHandler={editUserButtonHandler}
                 />
-              }) : <tr>No users to display.</tr>}
+              }) : <tr><th>No users to display.</th></tr>}
           </tbody>
         </table>
 
