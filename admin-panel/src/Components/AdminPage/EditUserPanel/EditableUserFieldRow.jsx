@@ -12,6 +12,7 @@ export function EditableFieldRow({
   fieldName,
   fieldValue,
   modalTitle,
+  submitButtonHandler,
   modal: ModalComponent,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,6 +41,8 @@ export function EditableFieldRow({
           textInputValue={textInputValue}
           handleChange={handleChange}
           closeButtonHandler={closeButtonHandler}
+          submitButtonHandler={
+            () => submitButtonHandler(textInputValue)}
           isOpen={isModalOpen}
           setTextInputValue={setTextInputValue}
         />

@@ -6,6 +6,22 @@ import { EditPasswordModal } from "./Modals/EditPasswordModal";
 import { EditEmailModal } from "./Modals/EditEmailModal";
 
 export function EditableUserTable({ user, deleteUserButtonHandler }) {
+
+
+  function submitDisplayName() {
+    //console.log('submitdisplayname');
+
+    const endpoint = `${urls.sqlDatabaseAPI}/editUser`;
+  }
+
+  function submitPassword() {
+
+  }
+
+  function submitEmail() {
+
+  }
+
   return (
     <table className="editable-user-table">
       <thead>
@@ -22,6 +38,9 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
           modalTitle={"Edit DisplayName: "}
           modal={
           EditDisplayNameModal}
+          submitButtonHandler={
+            submitDisplayName
+          }
        />
        <EditableFieldRow
          fieldName="Password"
@@ -29,6 +48,9 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
          modalTitle={"Edit Password: "}
          modal={
           EditPasswordModal}
+         submitButtonHandler={
+          submitPassword
+         }
        />
         <EditableFieldRow
          fieldName="Email"
@@ -36,6 +58,9 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
          modalTitle={"Edit Email: "}
          modal={
           EditEmailModal}
+         submitButtonHandler={
+          submitEmail
+         } 
         />
         <tr>
           <td></td>

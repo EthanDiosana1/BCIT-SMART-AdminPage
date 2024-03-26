@@ -2,7 +2,7 @@ import React, { Children, useEffect } from "react";
 import "./Modal.css";
 import ReactDOM from "react-dom";
 
-export default function Modal({ title, isOpen, onClose, onChange, children }) {
+export default function Modal({ title, isOpen, onClose, onSubmit, children }) {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -12,7 +12,7 @@ export default function Modal({ title, isOpen, onClose, onChange, children }) {
         {children}
         <div className="modal-button-container">
           <button className="cancel-button" onClick={onClose}>Cancel</button>
-          <button className="submit-button" onClick={onChange}>Submit</button>
+          <button className="submit-button" onClick={onSubmit}>Submit</button>
         </div>
       </div>
     </div>,

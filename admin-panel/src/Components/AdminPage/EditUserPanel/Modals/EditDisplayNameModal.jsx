@@ -9,15 +9,19 @@ export function EditDisplayNameModal({
     handleChange,
     isOpen,
     closeButtonHandler,
+    submitButtonHandler,
     setTextInputValue
 }) {
   
     return (
     <Modal
       title={title}
-        isOpen={isOpen}
+      isOpen={isOpen}
       onClose={() => {
         closeButtonHandler();
+      }}
+      onSubmit={() => {
+        submitButtonHandler();
       }}
     >
       <input
