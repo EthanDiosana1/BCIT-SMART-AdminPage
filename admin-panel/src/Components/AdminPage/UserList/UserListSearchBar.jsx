@@ -25,7 +25,7 @@ export function UserListSearchBar({
       <label htmlFor='searchUser'>Create user:</label>
       <button
           type='submit'
-        >Search</button>
+        >Create User</button>
       </div>
       <div>
         <label htmlFor='searchUser'>Search users:</label>
