@@ -9,9 +9,9 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
 
 
   function submitDisplayName() {
-    //console.log('submitdisplayname');
+    console.log('submitdisplayname');
 
-    const endpoint = `${urls.sqlDatabaseAPI}/editUser`;
+    //const endpoint = `${urls.sqlDatabaseAPI}/editUser`;
   }
 
   function submitPassword() {
