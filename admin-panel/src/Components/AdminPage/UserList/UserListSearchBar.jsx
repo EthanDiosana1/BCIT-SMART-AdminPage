@@ -19,7 +19,14 @@ export function UserListSearchBar({
   }
 
   return (
+    
     <form className='user-list-search-bar' onSubmit={onSearch}>
+      <div>
+      <label htmlFor='searchUser'>Create user:</label>
+      <button
+          type='submit'
+        >Search</button>
+      </div>
       <div>
         <label htmlFor='searchUser'>Search users:</label>
         <input
