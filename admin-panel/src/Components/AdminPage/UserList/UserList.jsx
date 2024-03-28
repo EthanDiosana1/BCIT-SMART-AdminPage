@@ -31,7 +31,8 @@ export function UserList({ editUserButtonHandler }) {
   const [jumpToPage, setJumpToPage] = useState('');
 
   useEffect(() => {
-    updateUsers(usersPerPage, 0);
+    updateUsers(usersPerPage);
+    getNumPages();
   }, [usersPerPage, currentPage]);
 
   async function resetUserTable() {
@@ -60,6 +61,11 @@ export function UserList({ editUserButtonHandler }) {
     }
   }
 
+  useEffect(() => {
+    const numPages = Math.ceil(numUsersDb / usersPerPage);
+    setTotalPages(numPages); 
+  }, [numUsersDb, usersPerPage]);
+
   async function getNumPages() {
       try {
 
@@ -78,12 +84,9 @@ export function UserList({ editUserButtonHandler }) {
         }
 
           const json = await response.json();
-
            const numUsers = json.count;
-
           // Set the number of users
           setNumUsersDb(numUsers);
-
       } catch(error) {
             console.error(error);
       }
@@ -91,7 +94,7 @@ export function UserList({ editUserButtonHandler }) {
 
   async function updateUsers(limit) {
       try {
-        const offset = currentPage * usersPerPage;
+        const offset = (currentPage - 1) * usersPerPage;
 
         const endpoint = `${urls.sqlDatabaseAPI}/getUsers?limit=${limit}&offset=${offset}`
         const response = await fetch(endpoint, {
@@ -114,12 +117,12 @@ export function UserList({ editUserButtonHandler }) {
           // Set the user list
         setUsers(result);
 
-          getNumPages();
+          await getNumPages();
 
-          const numPages = Math.ceil(numUsersDb/usersPerPage);
+          // const numPages = Math.ceil(numUsersDb/usersPerPage);
 
-          // Set the number of pages
-            setTotalPages(numPages-1);
+          // // Set the number of pages
+          //   setTotalPages(numPages-1);
 
     } catch (error) {
       console.error(error);
