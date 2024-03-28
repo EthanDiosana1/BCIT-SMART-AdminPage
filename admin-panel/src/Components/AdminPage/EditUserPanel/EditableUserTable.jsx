@@ -7,7 +7,7 @@ import { EditEmailModal } from "./Modals/EditEmailModal";
 
 export function EditableUserTable({ user, deleteUserButtonHandler }) {
 
-
+  console.log(user);
   function submitDisplayName() {
     console.log('submitdisplayname');
 
@@ -34,7 +34,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
       <tbody>
         <EditableFieldRow
           fieldName="DisplayName"
-          fieldValue={user.name}
+          fieldValue={user.display_name}
           modalTitle={"Edit DisplayName: "}
           modal={
           EditDisplayNameModal}

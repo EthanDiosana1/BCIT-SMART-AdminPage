@@ -1,5 +1,5 @@
 import './AdminPage.css'
-import testUsers from '../../data/testUsers.json';
+import urls from '../../data/urls.json';
 import React, { useState } from 'react'
 import { UserInfoContainer } from './UserInfoContainer'
 import { EditUserPanel } from './EditUserPanel/EditUserPanel'
@@ -13,9 +13,24 @@ export function AdminPage(props) {
 
   /** Retrieves the selected user by id from the db. */
   function getSelectedUser(user_id) {
+    if(!user_id) {
+      return null;
+    }
     try {
         // Get the user from the database.
-        console.log("test");
+        const queryString = '?user_id=' + user_id;
+        const endpoint = `${urls.sqlDatabaseAPI}/getUser` + queryString;
+        const response = fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error! Response status: ${response.status}`);
+          }
+          return response;
+        });
 
     } catch (error) {
       console.log(error)
