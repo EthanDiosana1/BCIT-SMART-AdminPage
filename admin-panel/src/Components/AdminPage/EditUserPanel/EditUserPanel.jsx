@@ -15,7 +15,7 @@ export function EditUserPanel({ user, backButtonHandler, deleteUserButtonHandler
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
-            <h1>UserId: {user.id}</h1>
+            <h1>UserId: {user.user_id}</h1>
             <EditableUserTable
                 user={user}
                 deleteUserButtonHandler={deleteUserButtonHandler} />

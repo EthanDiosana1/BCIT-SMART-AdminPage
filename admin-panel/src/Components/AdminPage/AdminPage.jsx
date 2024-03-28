@@ -9,12 +9,14 @@ import { UserList } from './UserList/UserList'
 export function AdminPage(props) {
 
   /** Contains the selected user. */
-  const [selectedUserId, setSelectedUserId] = useState(null)
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   /** Retrieves the selected user by id from the db. */
-  function getSelectedUser(id) {
+  function getSelectedUser(user_id) {
     try {
-      return testUsers.testUsers[id];
+        // Get the user from the database.
+        console.log("test");
+
     } catch (error) {
       console.log(error)
     }

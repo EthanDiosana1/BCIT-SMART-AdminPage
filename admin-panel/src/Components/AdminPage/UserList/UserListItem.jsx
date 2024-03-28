@@ -16,7 +16,7 @@ export function UserListItem({ user, editUserButtonHandler }) {
       <td>
         <EditUserButton
           handleClick={() => {
-            editUserButtonHandler(user.id)
+            editUserButtonHandler(user.user_id)
           }}
         />
       </td>
