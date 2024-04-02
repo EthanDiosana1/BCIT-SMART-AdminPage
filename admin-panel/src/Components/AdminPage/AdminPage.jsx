@@ -1,6 +1,6 @@
 import './AdminPage.css'
 import urls from '../../data/urls.json';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { UserInfoContainer } from './UserInfoContainer'
 import { EditUserPanel } from './EditUserPanel/EditUserPanel'
 import { AdminPageNavbar } from './AdminPageNavbar/AdminPageNavbar'
@@ -10,32 +10,40 @@ export function AdminPage(props) {
 
   /** Contains the selected user. */
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   /** Retrieves the selected user by id from the db. */
-  function getSelectedUser(user_id) {
-    if(!user_id) {
-      return null;
-    }
-    try {
-        // Get the user from the database.
+  useEffect(() => {
+    const getSelectedUser = async (user_id) => {
+      if (!user_id) {
+        setSelectedUser(null);
+        return;
+      }
+      try {
         const queryString = '?user_id=' + user_id;
         const endpoint = `${urls.sqlDatabaseAPI}/getUser` + queryString;
-        const response = fetch(endpoint, {
+        const response = await fetch(endpoint, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error! Response status: ${response.status}`);
-          }
-          return response;
+            'Content-Type': 'application/json',
+          },
         });
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
+        if (!response.ok) {
+          throw new Error(`Error! Response status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+        setSelectedUser(userData[0]);
+      } catch (error) {
+        console.error(error);
+        setSelectedUser(null);
+      }
+  };
+
+    getSelectedUser(selectedUserId);
+  }, [selectedUserId]);
+  
 
   /** Sends an API request to delete the selected user.
    * 
@@ -64,10 +72,10 @@ export function AdminPage(props) {
     <div className='admin-page'>
       <AdminPageNavbar />
       <UserInfoContainer>
-        {selectedUserId ? (
+        {selectedUser ? (
           // If a user is selected, display edit user panel.
           <EditUserPanel
-            user={getSelectedUser(selectedUserId)}
+            user={selectedUser}
             backButtonHandler={setSelectedUserId}
             deleteUserButtonHandler={deleteUserButtonHandler(selectedUserId)}
           />)
@@ -82,3 +90,5 @@ export function AdminPage(props) {
     </div>
   )
 }
+
+

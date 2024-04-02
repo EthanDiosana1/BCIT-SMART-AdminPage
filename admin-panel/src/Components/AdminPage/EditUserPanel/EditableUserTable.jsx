@@ -7,7 +7,8 @@ import { EditEmailModal } from "./Modals/EditEmailModal";
 
 export function EditableUserTable({ user, deleteUserButtonHandler }) {
 
-  console.log(user);
+  //console.log(user);
+
   function submitDisplayName() {
     console.log('submitdisplayname');
 
