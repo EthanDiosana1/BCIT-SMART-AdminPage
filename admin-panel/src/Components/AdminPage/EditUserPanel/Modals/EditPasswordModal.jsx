@@ -9,6 +9,7 @@ export function EditPasswordModal({
   handleChange,
   isOpen,
   closeButtonHandler,
+  submitButtonHandler,
   setTextInputValue,
 }) {
   return (
@@ -16,6 +17,12 @@ export function EditPasswordModal({
       title={title}
       isOpen={isOpen}
       onClose={() => {
+        closeButtonHandler();
+      }}
+      onSubmit={() => {
+        // pass the new password to the handler
+        submitButtonHandler(textInputValue);
+        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

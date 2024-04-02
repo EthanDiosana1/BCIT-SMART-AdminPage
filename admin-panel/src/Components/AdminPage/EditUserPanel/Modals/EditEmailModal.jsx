@@ -9,14 +9,21 @@ export function EditEmailModal({
     handleChange,
     isOpen,
     closeButtonHandler,
+    submitButtonHandler,
     setTextInputValue
 }) {
   
     return (
     <Modal
       title={title}
-        isOpen={isOpen}
+      isOpen={isOpen}
       onClose={() => {
+        closeButtonHandler();
+      }}
+      onSubmit={() => {
+        // pass the new email to the handler
+        submitButtonHandler(textInputValue);
+        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

@@ -19,9 +19,13 @@ export function EditDisplayNameModal({
       isOpen={isOpen}
       onClose={() => {
         closeButtonHandler();
+        setTextInputValue('');
       }}
       onSubmit={() => {
-        submitButtonHandler();
+        // pass the new display name to the handler
+        submitButtonHandler(textInputValue);
+        //setTextInputValue(textInputValue);
+        closeButtonHandler();
       }}
     >
       <input

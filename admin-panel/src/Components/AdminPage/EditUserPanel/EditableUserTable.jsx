@@ -1,5 +1,7 @@
+import urls from '../../../data/urls.json';
 import { DeleteUserButton } from "./DeleteUserButton";
 import { EditableFieldRow } from "./EditableUserFieldRow";
+import { useState } from "react";
 import "./EditableUserTable.css";
 import { EditDisplayNameModal } from "./Modals/EditDisplayNameModal";
 import { EditPasswordModal } from "./Modals/EditPasswordModal";
@@ -7,20 +9,70 @@ import { EditEmailModal } from "./Modals/EditEmailModal";
 
 export function EditableUserTable({ user, deleteUserButtonHandler }) {
 
+  //const [textInputValue, setTextInputValue] = useState('');
   //console.log(user);
 
-  function submitDisplayName() {
-    console.log('submitdisplayname');
-
-    //const endpoint = `${urls.sqlDatabaseAPI}/editUser`;
+  function submitDisplayName(newDisplayName) {
+    //console.log('submitdisplayname');
+    // Construct the endpoint URL and the payload
+   try {
+    const queryString = '?user_id=' + user.user_id + '&display_name=' + newDisplayName;
+    const endpoint = `${urls.sqlDatabaseAPI}/editUser` + queryString;
+    const response = fetch (endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then ((response) => {
+      if (!response.ok) {
+        throw new Error(`Error! Response status: ${response.status}`);
+      }
+      return response;
+    }); 
+   } catch (error) {
+    console.log(error);
+   }
   }
 
-  function submitPassword() {
+  function submitPassword(newPassword) {
+    try {
+      const queryString = '?user_id=' + user.user_id + '&password=' + newPassword;
+      const endpoint = `${urls.sqlDatabaseAPI}/editUser` + queryString;
+      const response = fetch (endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then ((response) => {
+        if (!response.ok) {
+          throw new Error(`Error! Response status: ${response.status}`);
+        }
+        return response;
+      }); 
+     } catch (error) {
+      console.log(error);
+     }
 
   }
 
-  function submitEmail() {
-
+  function submitEmail(newEmail) {
+    try {
+      const queryString = '?user_id=' + user.user_id + '&email=' + newEmail;
+      const endpoint = `${urls.sqlDatabaseAPI}/editUser` + queryString;
+      const response = fetch (endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then ((response) => {
+        if (!response.ok) {
+          throw new Error(`Error! Response status: ${response.status}`);
+        }
+        return response;
+      }); 
+     } catch (error) {
+      console.log(error);
+     }
   }
 
   return (
