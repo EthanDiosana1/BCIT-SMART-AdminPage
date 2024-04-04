@@ -1,4 +1,7 @@
-import './UserListSearchBar.css'
+import React, { useState } from 'react';
+import './UserListSearchBar.css';
+import urls from '../../../data/urls.json';
+import Modal from './Modals/Modal'; // Import the Modal component
 
 export function UserListSearchBar({
   fieldName, setFieldName,
@@ -8,11 +11,12 @@ export function UserListSearchBar({
   onReset,
   updateUsers 
 }) {
-  /**
-   *
-   * @param {*} event
-   * @param {*} state
-   */
+  const [showModal, setShowModal] = useState(false);
+
+  function handleModalToggle() {
+    setShowModal(!showModal);
+  }
+
   async function handleChange(event, state) {
     try {
       state(event.target.value);
@@ -26,6 +30,32 @@ export function UserListSearchBar({
     await updateUsers(usersPerPage, 0);
   }
 
+  async function onSubmit(formData) {
+    console.log("Trying to create a new user!");
+    try {
+      const params = {
+        display_name: formData.display_name,
+        password: formData.password,
+        email: formData.email
+      };
+    
+      const endpoint = `${urls.sqlDatabaseAPI}/createUser`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      });
+    
+      if (!response.ok) {
+        throw new Error(`Error! Response status: ${response.status}`);
+      }
+    
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <form className='user-list-search-bar' onSubmit={onSearch}>
@@ -75,7 +105,13 @@ export function UserListSearchBar({
           onClick={onReset}
         >Reset</button>
       </div>
+      <div>
+        <button type='button' onClick={handleModalToggle}>Create User</button>
+      </div>
+      <Modal isOpen={showModal} onClose={handleModalToggle} onSubmit={onSubmit}>
+        <h3>Modal Title</h3>
+        <p>Modal Content</p>
+      </Modal>
     </form>
   )
 }
-
