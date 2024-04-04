@@ -1,6 +1,4 @@
-
 .modal-overlay {
-    /* Styles for the overlay */
     position: fixed;
     top: 0;
     left: 0;
@@ -12,50 +10,43 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.671);
     user-select: none;
-    backdrop-filter: blur(3px); /* Adds blur effect */
+    backdrop-filter: blur(3px); 
     overflow: hidden; 
 }
 
 .modal-content {
-    /* Styles for the modal content */
-    min-height: 300px; /* Change as needed */
-    max-height: 400px; /* Change as needed */
-    min-width: 300px; /* Change as needed */
-    max-width: 400px; /* Change as needed */
-    padding: 30px; /* Adjust padding as needed */
-    overflow: auto; /* Enable overflow for content scrolling if necessary */
+    min-height: 300px; 
+    max-height: 400px; 
+    min-width: 300px; 
+    max-width: 400px; 
+    padding: 30px;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center; 
     border: 1px solid white;
     border-radius: 5px;
     color: white;
     background-color: rgba(0, 0, 0, 0.697);
-    font-family: 'Helvetica Neue', sans-serif; /* Modern font */
+    font-family: 'Helvetica Neue', sans-serif; 
     overflow: hidden; 
-}
-
-.modal-content * {
-    border-radius: 5px;
-    width: 70%;
-    padding: 6px;
 }
 
 .error-message {
     color: red;
     font-size: 14px;
-    margin-top: 10px; /* Add some space above the error message */
+    margin-top: 10px; 
 }
 
 .modal-button-container {
-    /* Styles for the button container */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px; /* Add space above the button container */
-    width: 100%; /* Ensure buttons take full width */
+    margin-top: 20px; 
+    width: 100%; 
     gap: 20px;
 }
 
@@ -69,7 +60,7 @@
 }
 
 .modal-button-container button:hover {
-    opacity: 1; /* Hover effect */
+    opacity: 1; 
 }
 
 .modal-button-container button.cancel-button {
