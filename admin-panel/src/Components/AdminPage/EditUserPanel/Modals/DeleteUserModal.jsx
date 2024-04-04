@@ -20,7 +20,6 @@ export function DeleteUserModal({
       }}
       onSubmit={() => {
         submitButtonHandler();
-        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

@@ -23,7 +23,6 @@ export function EditEmailModal({
       onSubmit={() => {
         // pass the new email to the handler
         submitButtonHandler(textInputValue);
-        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

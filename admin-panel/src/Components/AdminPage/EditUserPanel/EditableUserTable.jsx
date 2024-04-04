@@ -7,12 +7,8 @@ import { EditPasswordModal } from "./Modals/EditPasswordModal";
 import { EditEmailModal } from "./Modals/EditEmailModal";
 
 export function EditableUserTable({ user, deleteUserButtonHandler }) {
-
-  //const [textInputValue, setTextInputValue] = useState('');
   //console.log(user);
-
   function submitDisplayName(newDisplayName) {
-    //console.log('submitdisplayname');
     // Construct the endpoint URL and the payload
    try {
     const queryString = '?user_id=' + user.user_id + '&display_name=' + newDisplayName;

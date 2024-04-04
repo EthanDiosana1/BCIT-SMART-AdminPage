@@ -22,7 +22,6 @@ export function EditPasswordModal({
       onSubmit={() => {
         // pass the new password to the handler
         submitButtonHandler(textInputValue);
-        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

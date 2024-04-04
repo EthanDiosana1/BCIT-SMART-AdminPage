@@ -26,7 +26,7 @@ export function EditUserPanel({ user, backButtonHandler }) {
   }
 
   function submitDeleteUser() {
-    if (textInputValue == "yes") {
+    if (textInputValue === "yes") {
       try {
         const queryString = "?user_id=" + user.user_id;
         const endpoint = `${urls.sqlDatabaseAPI}/deleteUser` + queryString;
