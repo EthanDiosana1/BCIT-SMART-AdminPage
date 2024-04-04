@@ -50,13 +50,13 @@ export function AdminPage(props) {
    * @param {string} userId The id of the user to delete.
    * @returns 
    */
-  function deleteUserButtonHandler(userId) {
+  function deleteUserButtonHandler(user_id) {
     // If the selected user id is null, exit.
-    if (!userId) {
+    if (!user_id) {
       return;
     }
 
-    const parsed = parseInt(userId);
+    const parsed = parseInt(user_id);
     
     // If the selected user id is not an int, throw an error.
     if (!parsed || isNaN(parsed)) {
@@ -64,8 +64,6 @@ export function AdminPage(props) {
     }
 
     // Send a request to delete the user.
-
-    // Display a modal saying the user has been deleted.
   }
 
   return (

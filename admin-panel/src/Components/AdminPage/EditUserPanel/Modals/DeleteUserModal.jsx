@@ -8,6 +8,7 @@ export function DeleteUserModal({
   isOpen,
   handleChange,
   closeButtonHandler,
+  submitButtonHandler,
   setTextInputValue,
 }) {
   return (
@@ -15,6 +16,11 @@ export function DeleteUserModal({
       title={title}
       isOpen={isOpen}
       onClose={() => {
+        closeButtonHandler();
+      }}
+      onSubmit={() => {
+        submitButtonHandler();
+        //setTextInputValue(textInputValue);
         closeButtonHandler();
       }}
     >

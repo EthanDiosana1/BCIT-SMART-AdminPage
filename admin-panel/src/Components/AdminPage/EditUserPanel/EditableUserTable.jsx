@@ -1,7 +1,6 @@
 import urls from '../../../data/urls.json';
 import { DeleteUserButton } from "./DeleteUserButton";
 import { EditableFieldRow } from "./EditableUserFieldRow";
-import { useState } from "react";
 import "./EditableUserTable.css";
 import { EditDisplayNameModal } from "./Modals/EditDisplayNameModal";
 import { EditPasswordModal } from "./Modals/EditPasswordModal";
@@ -120,7 +119,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
           <td></td>
           <td>
             <DeleteUserButton 
-            handleClick={() => deleteUserButtonHandler()} 
+            handleClick={() => deleteUserButtonHandler()}
       />
           </td>
         </tr>
