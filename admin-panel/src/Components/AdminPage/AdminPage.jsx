@@ -76,6 +76,7 @@ export function AdminPage(props) {
             user={selectedUser}
             backButtonHandler={setSelectedUserId}
             deleteUserButtonHandler={deleteUserButtonHandler(selectedUserId)}
+            setSelectedUserId={setSelectedUserId}
           />)
           :
           (
