@@ -27,6 +27,11 @@ export function UserListSearchBar({
 
   async function handleNumUsersChange(event, state){
     handleChange(event, state);
+
+    if(usersPerPage <= 0) {
+        setUsersPerPage(1);
+    }
+
     await updateUsers(usersPerPage, 0);
   }
 
