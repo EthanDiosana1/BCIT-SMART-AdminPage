@@ -16,7 +16,7 @@ export function AdminPage(props) {
 
   /** Retrieves the selected user by id from the db. */
   useEffect(() => {
-      setIsLoading(true);
+      setIsLoading(false);
     const getSelectedUser = async (user_id) => {
       if (!user_id) {
         setSelectedUser(null);
