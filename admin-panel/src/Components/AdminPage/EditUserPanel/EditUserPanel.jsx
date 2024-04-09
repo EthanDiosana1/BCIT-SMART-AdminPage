@@ -9,7 +9,7 @@ import { DeleteUserModal } from "./Modals/DeleteUserModal";
  * @param {*} props
  * @returns
  */
-export function EditUserPanel({ user, backButtonHandler }) {
+export function EditUserPanel({ user, backButtonHandler, setSelectedUserId, setNeedsUpdate }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textInputValue, setTextInputValue] = useState("");
 
@@ -39,7 +39,7 @@ export function EditUserPanel({ user, backButtonHandler }) {
           if (!response.ok) {
             throw new Error(`Error! Response status: ${response.status}`);
           }
-            // setSelectedUserId(null);
+          setSelectedUserId(null);
           return response;
         });
       } catch (error) {
@@ -61,6 +61,7 @@ export function EditUserPanel({ user, backButtonHandler }) {
       <EditableUserTable
         user={user}
         deleteUserButtonHandler={deleteUserButtonHandler}
+        setNeedsUpdate={setNeedsUpdate}
       />
       <DeleteUserModal
         isOpen={isModalOpen}

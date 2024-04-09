@@ -11,9 +11,12 @@ export function AdminPage(props) {
   /** Contains the selected user. */
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   /** Retrieves the selected user by id from the db. */
   useEffect(() => {
+      setIsLoading(true);
     const getSelectedUser = async (user_id) => {
       if (!user_id) {
         setSelectedUser(null);
@@ -35,14 +38,18 @@ export function AdminPage(props) {
 
         const userData = await response.json();
         setSelectedUser(userData[0]);
+              setIsLoading(false);
+              setNeedsUpdate(false);
       } catch (error) {
+              setIsLoading(false);
+        setNeedsUpdate(false);
         console.error(error);
         setSelectedUser(null);
       }
   };
 
     getSelectedUser(selectedUserId);
-  }, [selectedUserId]);
+  }, [selectedUserId, needsUpdate]);
   
 
   /** Sends an API request to delete the selected user.
@@ -67,6 +74,7 @@ export function AdminPage(props) {
   }
 
   return (
+      isLoading ? <div>Loading...</div> : 
     <div className='admin-page'>
       <AdminPageNavbar />
       <UserInfoContainer>
@@ -76,7 +84,8 @@ export function AdminPage(props) {
             user={selectedUser}
             backButtonHandler={setSelectedUserId}
             deleteUserButtonHandler={deleteUserButtonHandler(selectedUserId)}
-            //setSelectedUserId={setSelectedUserId}
+            setNeedsUpdate={setNeedsUpdate}
+            setSelectedUserId={setSelectedUserId}
           />)
           :
           (

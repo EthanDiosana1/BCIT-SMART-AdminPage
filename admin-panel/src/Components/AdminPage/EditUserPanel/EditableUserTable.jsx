@@ -6,7 +6,7 @@ import { EditDisplayNameModal } from "./Modals/EditDisplayNameModal";
 import { EditPasswordModal } from "./Modals/EditPasswordModal";
 import { EditEmailModal } from "./Modals/EditEmailModal";
 
-export function EditableUserTable({ user, deleteUserButtonHandler }) {
+export function EditableUserTable({ user, deleteUserButtonHandler, setNeedsUpdate }) {
   //console.log(user);
   function submitDisplayName(newDisplayName) {
     // Construct the endpoint URL and the payload
@@ -22,6 +22,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
       if (!response.ok) {
         throw new Error(`Error! Response status: ${response.status}`);
       }
+      setNeedsUpdate(true);
       return response;
     }); 
    } catch (error) {
@@ -42,6 +43,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
         if (!response.ok) {
           throw new Error(`Error! Response status: ${response.status}`);
         }
+      setNeedsUpdate(true);
         return response;
       }); 
      } catch (error) {
@@ -63,6 +65,7 @@ export function EditableUserTable({ user, deleteUserButtonHandler }) {
         if (!response.ok) {
           throw new Error(`Error! Response status: ${response.status}`);
         }
+      setNeedsUpdate(true);
         return response;
       }); 
      } catch (error) {
