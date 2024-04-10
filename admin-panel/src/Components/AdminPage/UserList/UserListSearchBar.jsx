@@ -28,11 +28,18 @@ export function UserListSearchBar({
   async function handleNumUsersChange(event, state){
     handleChange(event, state);
 
-    if(usersPerPage <= 0) {
-        setUsersPerPage(1);
+
+    if(event.target.value <= 0) {
+        event.target.value = "";
     }
 
-    await updateUsers(usersPerPage, 0);
+    if(event.target.value > 500)
+      {
+        event.target.value = 500;
+      }
+
+      setUsersPerPage(event.target.value);
+
   }
 
   async function onSubmit(formData) {
