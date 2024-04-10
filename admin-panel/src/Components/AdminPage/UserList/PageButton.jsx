@@ -101,7 +101,6 @@ import React, { useState, useEffect } from 'react';
             step="1"
           />
         </label>
-        <button type="submit">Go</button>
       </form>
     </div>
   );
